@@ -12,7 +12,8 @@ END_EVENT_TABLE()
 
 // -----------------------------------------------------------------------------
 
-char* narrow( const wstring& str ) {
+char* narrow( const wstring& str )
+{
 	ostringstream stm ;
 	const ctype<char>& ctfacet =
 	use_facet< ctype<char> >( stm.getloc() ) ;
@@ -24,10 +25,12 @@ char* narrow( const wstring& str ) {
 	return c;
 }
 
-bool wxSightApp::OnInit() {
+bool wxSightApp::OnInit()
+{
 	char ** args = new char*[argc];
+
 	for ( int i = 0; i < argc; i++ )
-		args[i] = narrow( argv[i] );
+		args[i] = (char*) narrow( (const wstring) argv[i] );
 	
     glutInit( &argc, args );
 	#ifdef __WXMAC__

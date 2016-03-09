@@ -29,6 +29,19 @@ inline wxImage _wxGetImageFromMemory(const unsigned char *data, int length) {
 	return wxImage(is, wxBITMAP_TYPE_PNG);
 } // end method
 
+#if wxCHECK_VERSION(2, 8, 0) && !(WXWIN_COMPATIBILITY_2_6)
+// #if wxCHECK_VERSION(3, 0, 0) && !(WXWIN_COMPATIBILITY_2_6)
+    // Note the following defines need removed
+    // when CodeBlocks support for wxWidgets 2.6 is dropped
+    #define wxOPEN wxFD_OPEN
+    #define wxFILE_MUST_EXIST wxFD_FILE_MUST_EXIST
+    #define wxMULTIPLE wxFD_MULTIPLE
+    #define wxSAVE wxFD_SAVE
+    #define wxOVERWRITE_PROMPT wxFD_OVERWRITE_PROMPT
+    #define wxCHANGE_DIR wxFD_CHANGE_DIR
+#endif
+
+
 #include "interface.h"
 
 SightGL sight;

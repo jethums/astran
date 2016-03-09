@@ -35,31 +35,32 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/sight/model.o \
-	${OBJECTDIR}/src/interface/interface.o \
-	${OBJECTDIR}/src/sight/states/lbl.o \
-	${OBJECTDIR}/src/sight/label.o \
-	${OBJECTDIR}/src/sight/sight.o \
-	${OBJECTDIR}/src/basicglpane.o \
-	${OBJECTDIR}/src/sight/states/select.o \
-	${OBJECTDIR}/src/sight/opengl.o \
-	${OBJECTDIR}/src/sight/states/drag.o \
-	${OBJECTDIR}/src/sight/io_files.o \
-	${OBJECTDIR}/src/sight/fileformats/BinaryFileReader.o \
-	${OBJECTDIR}/src/sight/txGpu.o \
-	${OBJECTDIR}/src/interface/layeritem.o \
-	${OBJECTDIR}/src/sight/states/line.o \
 	${OBJECTDIR}/src/app.o \
+	${OBJECTDIR}/src/basicglpane.o \
+	${OBJECTDIR}/src/interface/interface.o \
+	${OBJECTDIR}/src/interface/layeritem.o \
 	${OBJECTDIR}/src/sight/camera.o \
-	${OBJECTDIR}/src/sight/rectangle.o \
+	${OBJECTDIR}/src/sight/fileformats/BinaryFileReader.o \
+	${OBJECTDIR}/src/sight/fileformats/gds.o \
+	${OBJECTDIR}/src/sight/io_files.o \
+	${OBJECTDIR}/src/sight/label.o \
 	${OBJECTDIR}/src/sight/layer.o \
-	${OBJECTDIR}/src/sight/ruler.o \
-	${OBJECTDIR}/src/sight/wire_line.o \
+	${OBJECTDIR}/src/sight/model.o \
+	${OBJECTDIR}/src/sight/opengl.o \
+	${OBJECTDIR}/src/sight/rectangle.o \
 	${OBJECTDIR}/src/sight/repository.o \
+	${OBJECTDIR}/src/sight/ruler.o \
+	${OBJECTDIR}/src/sight/sight.o \
+	${OBJECTDIR}/src/sight/states/drag.o \
+	${OBJECTDIR}/src/sight/states/lbl.o \
+	${OBJECTDIR}/src/sight/states/line.o \
+	${OBJECTDIR}/src/sight/states/rulerst.o \
+	${OBJECTDIR}/src/sight/states/select.o \
 	${OBJECTDIR}/src/sight/states/sqr.o \
 	${OBJECTDIR}/src/sight/states/wire.o \
-	${OBJECTDIR}/src/sight/states/rulerst.o \
-	${OBJECTDIR}/src/sight/fileformats/gds.o
+	${OBJECTDIR}/src/sight/txGpu.o \
+	${OBJECTDIR}/src/sight/wire_line.o
+
 
 
 # C Compiler Flags
