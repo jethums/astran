@@ -14,26 +14,26 @@ SightGL::SightGL() {
 	clsStates[	SIGHT_DRAG      ] = new SightDragState( *this );
 	clsStates[	SIGHT_LABEL     ] = new SightLabelState( *this );
 	setState( SIGHT_SELECT );
-	
+
 	selectedObject = NULL;
 	previousSelectedObject = NULL;
 	selectedRuler = NULL;
 	previousRuler = NULL;
-	
+
 	scale = 100;
 	stepScale = scale/10;
-	
+
 	camera = Camera();
 	repository = Repository(&camera);
 	clsFile = File( (&repository) );
-	
+
 	clsCurrentLayer = 2;
 
 	clsException = SIGHT_NONE;
-		
+
 	unsigned char c = (unsigned char)1.0f;
-	clsColorGuide = Color(c,c,c);			
-	
+	clsColorGuide = Color(c,c,c);
+
  } // end constructor
 
 // -----------------------------------------------------------------------------
@@ -76,30 +76,30 @@ void SightGL::loadCIF( const char * const filename ) {
 		camera.setCameraPosition( 0, 0 );
 
 		clsFile.loadFileCIF( filename , 1/*ID*/ );
-		
+
 			checkGLErrors();
-		if(repository.setAbsoluteBoudingBox()){cerr<<"Bouding box error\n";};		
+		if(repository.setAbsoluteBoudingBox()){cerr<<"Bouding box error\n";};
 			checkGLErrors();
 		const float W = abs(repository.getMax().x - repository.getMin().x) ;
 		const float H = abs(repository.getMax().y - repository.getMin().y) ;
 			checkGLErrors();
-	
+
 		camera.mouseZoomIn( W , H ,
-							W/2 + min( repository.getMax().x, repository.getMin().x) , 
+							W/2 + min( repository.getMax().x, repository.getMin().x) ,
 							H/2 + min( repository.getMax().y, repository.getMin().y)
-						   );	
-		checkGLErrors();		
-			
+						   );
+		checkGLErrors();
+
 		camera.setInitialZoom( camera.getZoom() );
 		camera.setInitialCameraCenterX(W/2 + min( repository.getMax().x, repository.getMin().x));
 		camera.setInitialCameraCenterY(H/2 + min( repository.getMax().y, repository.getMin().y));
 		cerr<< "ZOOM OUT\n";
 		camera.zoomOut( 0.1f );//*/
-		
+
 			checkGLErrors();
-	cameraMin.x = (int)camera.getBeginGridX();	
+	cameraMin.x = (int)camera.getBeginGridX();
 	cameraMin.y = (int)camera.getBeginGridY();
-	cameraMax.x = (int)camera.getEndGridX();		
+	cameraMax.x = (int)camera.getEndGridX();
 	cameraMax.y = (int)camera.getEndGridY();
 } // load a cif file
 
@@ -117,13 +117,13 @@ void SightGL::saveFile(const char * const  filename){
 // -----------------------------------------------------------------------------
 
 void SightGL::setLayerVisibility( const int layer, const bool visible ) {
-	repository.getLayer( layer ).setVisible( visible );	
+	repository.getLayer( layer ).setVisible( visible );
 } // set the layer visibility
 
 // -----------------------------------------------------------------------------
 
 string SightGL::getLayerName( const int index ) {
-	return repository.getLayer( index ).getName( ); 
+	return repository.getLayer( index ).getName( );
 }//get the layer name/material
 
 // -----------------------------------------------------------------------------
@@ -171,8 +171,8 @@ void SightGL::handleKeyEvent(unsigned char key, bool ctrl){
 			case  22: repository.pasteSelection(0, 0); render(); break;
 			case  24: repository.cuteSelection(); render(); break;
 			case  27: restartDraw(); break;
-			//case  13: down = !down; handleClickLD(currentCursorX, currentCursorY, down); break;		
-		} // end switch		
+			//case  13: down = !down; handleClickLD(currentCursorX, currentCursorY, down); break;
+		} // end switch
 	}//end else
 }//end method
 
@@ -226,7 +226,7 @@ void SightGL::addLabel( Object * newObj){
 
 void SightGL::addObject( Object * newObj){
 	repository.addObject( newObj, clsCurrentLayer );
-}//add a new object in the current layer 
+}//add a new object in the current layer
 
 // -----------------------------------------------------------------------------
 
@@ -261,8 +261,8 @@ void SightGL::restartDraw(){
 	const float H = abs(repository.getMax().y - repository.getMin().y) ;
 	camera.setCameraPosition(
 		W/2 + min(repository.getMax().x, repository.getMin().x),
-		H/2 + min(repository.getMax().y, repository.getMin().y));					
-	camera.resetZoomAndPosition(W, H); 
+		H/2 + min(repository.getMax().y, repository.getMin().y));
+	camera.resetZoomAndPosition(W, H);
 }//end function
 
 // -----------------------------------------------------------------------------
@@ -291,9 +291,9 @@ void SightGL::fitIn( ){
 bool SightGL::zoomIn(){
 	const float width = abs(clsPrevTouch.x - clsCursorPos.x);
 	const float height = abs(clsPrevTouch.y - clsCursorPos.y);
-	if( (abs(clsPrevTouch.x - clsCursorPos.x ) * abs(clsPrevTouch.y - clsCursorPos.y)) > scale){  
-		camera.mouseZoomIn( width, height, 
-							width/2  + min( clsPrevTouch.x, clsCursorPos.x), 
+	if( (abs(clsPrevTouch.x - clsCursorPos.x ) * abs(clsPrevTouch.y - clsCursorPos.y)) > scale){
+		camera.mouseZoomIn( width, height,
+							width/2  + min( clsPrevTouch.x, clsCursorPos.x),
 							height/2 + min( clsPrevTouch.y, clsCursorPos.y) );
 		render();
 		return true;
@@ -313,20 +313,20 @@ void SightGL::applyColorGuide(){
 void SightGL::renderBlendingBox(Vertex first, Vertex last){
 
 	restoreScreen();
-	
+
 	glDisable(GL_DEPTH_TEST);
 	glEnable( GL_BLEND );
-	
+
 	glColor4f( 192 / 255.0f, 192 / 255.0f, 192 / 255.0f, 0.35f );
-	
+
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-	glBegin( GL_QUADS );	
+	glBegin( GL_QUADS );
 		glVertex3f( first.x, first.y, maximo );
 		glVertex3f( last.x, first.y, maximo );
 		glVertex3f( last.x, last.y, maximo );
 		glVertex3f( first.x, last.y, maximo );
 	glEnd();
-	glDisable( GL_BLEND );	
+	glDisable( GL_BLEND );
 
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 	glBegin( GL_QUADS );
@@ -334,10 +334,10 @@ void SightGL::renderBlendingBox(Vertex first, Vertex last){
 		glVertex3f( last.x, first.y, maximo );
 		glVertex3f( last.x, last.y, maximo );
 		glVertex3f( first.x, last.y, maximo );
-	glEnd();	
-	
-	glEnable(GL_DEPTH_TEST);			
-	
+	glEnd();
+
+	glEnable(GL_DEPTH_TEST);
+
 	//if ( flush )
 		glFlush();
 }
@@ -380,10 +380,10 @@ bool SightGL::touch( const bool stop ) {
 
 void SightGL::moveCursor( const int xScreen, const int yScreen ) {
 	clsPreviousCursorPos = clsCursorPos;
-	
+
 	clsCursorPos.x = discretise( camera.xScreenToCamera( xScreen ), stepScale );
 	clsCursorPos.y = discretise( camera.yScreenToCamera( yScreen ), stepScale );
-	
+
 	if ( clsPreviousCursorPos.x != clsCursorPos.x || clsPreviousCursorPos.y != clsCursorPos.y ){
 		switch( clsException ){
 			case SIGHT_NONE: clsStates[ clsCurrentStateName ]->onCursorMove( clsCursorPos ); break;
@@ -435,7 +435,7 @@ void SightGL::restoreScreen( const int xSpace, const int ySpace, const int wSpac
 	const int w = camera.distCameraToScreen( wSpace );
 	const int h = camera.distCameraToScreen( hSpace );
 	copyPixels(x, y, w, h, GL_BACK, GL_FRONT);
-#endif	
+#endif
 } // end method
 
 // -----------------------------------------------------------------------------
@@ -460,9 +460,9 @@ void SightGL::reshapeWindow( const int width, const int height ) {
 	clsWindowWidth = width;
 	clsWindowHeight = height;
 
-	cameraMin.x = (int)camera.getBeginGridX();	
+	cameraMin.x = (int)camera.getBeginGridX();
 	cameraMin.y = (int)camera.getBeginGridY();
-	cameraMax.x = (int)camera.getEndGridX();		
+	cameraMax.x = (int)camera.getEndGridX();
 	cameraMax.y = (int)camera.getEndGridY();
 
 	camera.setViewportDimension( width, height );
@@ -496,19 +496,19 @@ void SightGL::setup() {
 	// Setups OpenGL.
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity();
-	
-	glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );		
+
+	glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-		
+
 	glClearDepth( 1.0f );
 	glEnable( GL_DEPTH_TEST );
-	glDepthFunc( GL_LEQUAL );		
+	glDepthFunc( GL_LEQUAL );
 
 	// Setup camera.
 	camera.setViewportDimension( clsWindowWidth, clsWindowHeight );
 	camera.setCameraPosition( 0, 0 );
 	camera.setZoom(1.0f);
-	
+
 	repository.setScale(scale);
 	repository.resetAbsoluteBoudingBox();
 } // end function
@@ -569,8 +569,8 @@ void SightGL::deleteSelectedObject() {
 			repository.deleteRuler(selectedRuler);
 			render();
 		}//end if
-	}else{*/	
-		repository.deleteSelecteds();  		
+	}else{*/
+		repository.deleteSelecteds();
 		selectedObject = NULL;
 		previousSelectedObject = NULL;
 
@@ -583,31 +583,31 @@ void SightGL::deleteSelectedObject() {
 // Render grid -> render the guide grid
 // -----------------------------------------------------------------------------
 
-void SightGL::renderGrid(){	
+void SightGL::renderGrid(){
 
 	if(camera.getZoom() < (float)10/scale ){ return; }
 	applyColorGuide();
-	
+
 	const int inicialX = discretise(camera.getBeginGridX(), scale);
-	const int inicialY = discretise(camera.getBeginGridY(), scale);		
+	const int inicialY = discretise(camera.getBeginGridY(), scale);
 
 	int gridX;
 	int gridY;
-	
+
 	glPointSize (0.1f);
 	glDisable( GL_DEPTH_TEST );
 	glBegin(GL_POINTS);
 		gridX = inicialX;
-		gridY = inicialY;		
+		gridY = inicialY;
 		for( int i=0; i < camera.getWindowHeight()/scale + 1; i++ ){
 			for( int j=0; j < camera.getWindowWidth()/scale + 1; j++ ){
 				//if ( i % largeStep == 0 && j % largeStep == 0 ) continue ;
-				glVertex3f( gridX , gridY, 0 );	
-				gridX = gridX + scale;		
+				glVertex3f( gridX , gridY, 0 );
+				gridX = gridX + scale;
 			}//end for
 			gridX = inicialX;
 			gridY = gridY + scale;
-		}//end for	
+		}//end for
 	glEnd();
 	glEnable( GL_DEPTH_TEST );
 	glPointSize (1.0f);
@@ -637,18 +637,18 @@ void SightGL::renderAxes() {
 // Render.
 // -----------------------------------------------------------------------------
 void SightGL::render() {
-	cerr << "REEEEEENDERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRsight\n";
+	// cerr << "REEEEEENDERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRsight\n";
 	checkGLErrors();
 
 	// Clear color and depth buffers.
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	checkGLErrors();
-	
+
 	// Draw guides.
 	renderAxes();
-	renderGrid(); 
-	
+	renderGrid();
+
 	// Draw objetcs.
 	repository.drawAll();
 	checkGLErrors();
@@ -660,9 +660,9 @@ void SightGL::render() {
 	glFlush();
 
 	saveScreen();
-		
+
 	repository.drawSelectedBoundingBox(maximo);
-	
+
 	glFinish();
 	glFlush();
 
@@ -682,7 +682,7 @@ void SightGL::refreshScreen() {
 } // end method
 
 //-----------------------------------------------------------------------------
-// Maps the coordinates 
+// Maps the coordinates
 //-----------------------------------------------------------------------------
 void SightGL::window_pos( GLfloat x, GLfloat y, GLfloat z, GLfloat w ){
    GLfloat fx, fy;
@@ -722,23 +722,23 @@ void SightGL::copyPixels( GLint x, GLint y, GLint width, GLint height, GLenum so
 	glReadBuffer( sourceBuffer );
 	glDrawBuffer( targetBuffer );
 	glDisable(GL_DEPTH_TEST);
-	
+
 	cerr<< "COPYPIXELS\n";
-	
-	window_pos(x, y, maximo, 1); 
-	
+
+	window_pos(x, y, maximo, 1);
+
 	glCopyPixels( x, y, width, height, GL_COLOR );
 	glDrawBuffer( GL_FRONT );
 
 	GLboolean validd;
-	
+
 	glGetBooleanv( GL_CURRENT_RASTER_POSITION_VALID, &validd);
 	if( !validd ){ cout<<"RASTER PANIC*****************\n"; }
-	glEnable(GL_DEPTH_TEST);	
+	glEnable(GL_DEPTH_TEST);
 	glFinish();
 
 	//repository.drawRulers(maximo, scale, camera.getZoom());
-	
+
 }
 
 
@@ -746,7 +746,7 @@ void SightGL::copyPixels( GLint x, GLint y, GLint width, GLint height, GLenum so
 // Discretise -> discretize de mouse moves
 // -----------------------------------------------------------------------------
 int SightGL::discretise( const float f, const int step){
-	return ((int)round(f) / step ) * step; 
+	return ((int)round(f) / step ) * step;
 }//end function
 
 // -----------------------------------------------------------------------------
@@ -756,7 +756,7 @@ unsigned char* SightGL::getPixels() const {
 	glGetFloatv( GL_VIEWPORT, viewport );
 
 	GLubyte * pixels = new GLubyte[clsWindowWidth * clsWindowHeight * 3];
-	
+
 	glReadPixels (0, 0, clsWindowWidth, clsWindowHeight, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
 	return pixels;
@@ -911,30 +911,30 @@ void SightGL::loadGDSII( const char* const filename ){
 		camera.setCameraPosition( 0, 0 );
 
 		clsFile.loadFileGDS2( filename );
-		
+
 			checkGLErrors();
-		if(repository.setAbsoluteBoudingBox()){cerr<<"Bouding box error\n";};		
+		if(repository.setAbsoluteBoudingBox()){cerr<<"Bouding box error\n";};
 			checkGLErrors();
 		const float W = abs(repository.getMax().x - repository.getMin().x) ;
 		const float H = abs(repository.getMax().y - repository.getMin().y) ;
 			checkGLErrors();
-	
+
 		camera.mouseZoomIn( W , H ,
-							W/2 + min( repository.getMax().x, repository.getMin().x) , 
+							W/2 + min( repository.getMax().x, repository.getMin().x) ,
 							H/2 + min( repository.getMax().y, repository.getMin().y)
-						   );	
-		checkGLErrors();		
-			
+						   );
+		checkGLErrors();
+
 		camera.setInitialZoom( camera.getZoom() );
 		camera.setInitialCameraCenterX(W/2 + min( repository.getMax().x, repository.getMin().x));
 		camera.setInitialCameraCenterY(H/2 + min( repository.getMax().y, repository.getMin().y));
 		cerr<< "ZOOM OUT\n";
 		camera.zoomOut( 0.1f );//*/
-		
+
 			checkGLErrors();
-	cameraMin.x = (int)camera.getBeginGridX();	
+	cameraMin.x = (int)camera.getBeginGridX();
 	cameraMin.y = (int)camera.getBeginGridY();
-	cameraMax.x = (int)camera.getEndGridX();		
+	cameraMax.x = (int)camera.getEndGridX();
 	cameraMax.y = (int)camera.getEndGridY();
 }
 
@@ -948,7 +948,7 @@ void SightGL::mirror(bool Xmirror){
 
 // -----------------------------------------------------------------------------
 void SightGL::connection(const int ID){
-	if(repository.findConnection(ID)) 
+	if(repository.findConnection(ID))
 		render();
 }
 
