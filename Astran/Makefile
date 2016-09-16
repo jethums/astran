@@ -125,12 +125,13 @@ help: .help-post
 # Add your post 'help' code here...
 
 
-#export LD_LIBRARY_PATH=/opt/centos/devtoolset-1.1/root/usr/lib64:/usr/lib64/
-#export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
-#export CCC=/opt/centos/devtoolset-1.1/root/usr/bin/g++
-#export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
-#export AS=/opt/centos/devtoolset-1.1/root/usr/libexec/gcc/x86_64-CentOS-linux/4.7.2/as
-
+ifeq ($(shell hostname),kriti)
+export LD_LIBRARY_PATH=/usr/lib64/
+export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
+export CCC=/opt/centos/devtoolset-1.1/root/usr/bin/g++
+export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
+export AS=/opt/centos/devtoolset-1.1/root/usr/libexec/gcc/x86_64-CentOS-linux/4.7.2/as
+endif
 
 # include project implementation makefile
 include nbproject/Makefile-impl.mk

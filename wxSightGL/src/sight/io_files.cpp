@@ -73,11 +73,11 @@ File::File(Repository * repository) {
 	layer["VIA1" ] = 11;	layer["CVA"  ] = 11;
 	layer["MET1P"] = 10;	layer["CPF"  ] = 10;
 	layer["MET1" ] =  9;	layer["CMF"  ] =  9;
-	layer["POL2" ] =  8;	
+	layer["POL2" ] =  8;
 	layer["CCG"  ] =  7;	layer["CONT" ] =  7;
 	layer["POL1" ] =  6;	layer["CPG"  ] =  6;	layer["POLY" ] =  6;
 	layer["PDIF" ] =  5;	layer["CAP"  ] =  5;	layer["CAA"  ] =  5;
-	layer["NDIF" ] =  4;	layer["CAN"  ] =  4;	
+	layer["NDIF" ] =  4;	layer["CAN"  ] =  4;
 	layer["PSEL" ] =  3;	layer["CSP"  ] =  3;
 	layer["NSEL" ] =  2;	layer["CSN"  ] =  2;
 	layer["NWEL" ] =  1;	layer["CWN"  ] =  1;
@@ -88,16 +88,16 @@ File::File(Repository * repository) {
 // -----------------------------------------------------------------------------
 // Parse LAYER.
 // -----------------------------------------------------------------------------
-void File::parseLayerCIF( istringstream &input ){    
+void File::parseLayerCIF( istringstream &input ){
 	string camada;
 	input >> camada;
-		
+
 	if ( camada[camada.size()-1] == ';')
 		camada.resize(camada.size()-1);
-	
+
   map<string,int>::iterator iter = layer.find(camada);
 
-	if ( iter != layer.end() ) { 
+	if ( iter != layer.end() ) {
 		currentLayer =  iter->second;
 	} // end if
 	else {
@@ -106,48 +106,48 @@ void File::parseLayerCIF( istringstream &input ){
 		for( size_t i = 0; i < undefineds.size(); i++){
 			if ( undefineds[i] == camada ){ already = true; }
 		}
-		if( !already ){	
+		if( !already ){
 			undefineds.push_back(camada);
 			cerr << "[ERROR] Undefined layer " << camada << ".\n";
-		}		
-		
+		}
+
 	} // end if
 } //end parselayer
 
 // -----------------------------------------------------------------------------
 // Parse SUB ROTINE.
 // -----------------------------------------------------------------------------
-void File::parseModelCIF( istringstream &input ){  
+void File::parseModelCIF( istringstream &input ){
 
-	int ID, divd, divs;	
+	int ID, divd, divs;
 	input >> ID >> divd >> divs;
-	
+
 	char buffer[5];
 
 	sprintf(buffer,"%i", ID);
 	const char* str2  = "untitle ";
-	char* str3;	
-	str3 = (char *)calloc(strlen(str2) +7, sizeof(char));	
+	char* str3;
+	str3 = (char *)calloc(strlen(str2) +7, sizeof(char));
 	strcat(str3, str2);
-	strcat(str3, buffer);	
-	
+	strcat(str3, buffer);
+
 	Model newModel;
 	newModel.setModelId(ID);
-	newModel.setScale(divd , divs);	
+	newModel.setScale(divd , divs);
 	newModel.setName(str3);
-	
+
 	clsRepository->addModel( newModel );
 }
 
 // -----------------------------------------------------------------------------
 // Parse ROTINE NAME.
 // -----------------------------------------------------------------------------
-void File::parseModelName( istringstream &input ){  
+void File::parseModelName( istringstream &input ){
 
-	string name;	
+	string name;
 	input >>name;
 	if( name[name.size()-1] == ';' ) name.erase(name.size()-1);
-	
+
 	clsRepository->clsModels[ clsRepository->currentModel ].setName(name);
 }
 
@@ -156,15 +156,15 @@ void File::parseModelName( istringstream &input ){
 // -----------------------------------------------------------------------------
 void File::parseLabelCIF( istringstream &input ){
 	int x, y;
-	string txt;	
+	string txt;
 	input >> txt >> x >> y;
-	
+
 	SightLabel *newLabel = new SightLabel(txt, x, y);
-	
+
 	if( state == FREE ){
 		clsRepository->addObject( newLabel, LABEL_ID );
 	} else {
-		clsRepository->clsModels[ clsRepository->currentModel ].addContent( newLabel, LABEL_ID );	
+		clsRepository->clsModels[ clsRepository->currentModel ].addContent( newLabel, LABEL_ID );
 	}//end else
 }//end parse label
 // -----------------------------------------------------------------------------
@@ -173,7 +173,7 @@ void File::parseLabelCIF( istringstream &input ){
 void File::parseRectangleCIF( istringstream &input , const int ID) {
 	int x0, y0, x1, y1, length, width;
 	input >> length >> width >> x0 >> y0;
-	
+
 	//cout<<"adding rectangle\n";
     x1 = x0 + (length / 2);
     y1 = y0 - (width / 2);
@@ -183,19 +183,19 @@ void File::parseRectangleCIF( istringstream &input , const int ID) {
 	SightRectangle *newRectangle = new SightRectangle( Vertex( x0, y0 ), Vertex( x1, y1 ) );
 
 	if( state == FREE ){
-		//cerr << "Add free...\n"; 
+		//cerr << "Add free...\n";
 		clsRepository->addObject( newRectangle, ID );
 	} else {
 		//cerr << "Add model...\n";
 		clsRepository->clsModels[ clsRepository->currentModel ].addContent( newRectangle, currentLayer );
-	}		
-				
+	}
+
 } // end function
 
 // -----------------------------------------------------------------------------
 // Parse WIRE
 // -----------------------------------------------------------------------------
-/*void File::parseWireCIF(){	
+/*void File::parseWireCIF(){
 	SightWire *newWire = new SightWire( ID+1, mouseClicks );
 	newWire->setColor( Color( 0, 255, 255 ) );
 	newWire->setLayer( layer );
@@ -217,7 +217,7 @@ void File::parseCallCIF( istringstream &input, const int ID ){
 
 	//cout << "Parsng Call: "<< input.str() << "\n";
 cerr<<"CALL\n\n";
-	char in = ' '; 
+	char in = ' ';
 	int mod;
 	input>> mod;
 	//cerr<< mod << " MODELO\n";
@@ -227,33 +227,33 @@ cerr<<"CALL\n\n";
 		cerr << "[WARNING] Subrotine " << mod << " was not declared.\n";
 		return;
 	} // end if
-	
+
 /*	vector < ObjectReference > contents;
-	
+
 	contents = model->getContents();
-	
+
 	printme(contents.size());
-	
+
 	for (size_t i=0; i< contents.size(); i++){
 		contents[i] = ObjectReference(contents[i]->clone(), contents[i].getLayer());
 	}//*/
-	
+
 	sgtComponent * c = new sgtComponent();
-	
+
 	c->setModelPt(model);
-	
+
 	input >> in;
 
 	while (in != ';'){
 	//cout << "Leu: "  << in << "\n";
-		
+
 		int x;	int y;
-		
+
 		switch (in){
 			case 'T' :	input >> x >> y;
 						c->setTranslation(x,y);
 				/*		for( size_t i=0; i<contents.size(); i++){
-							contents[i]->translate(x, y);						
+							contents[i]->translate(x, y);
 						}//*/
 						break;
 			case 'R' :	input >> x >> y;
@@ -274,18 +274,18 @@ cerr<<"CALL\n\n";
 								contents[i]->mirroring(false);
 							}
 						}//*/
-						break;		
+						break;
 		}
 		input >> in;
 	}//end while
-	
-	
+
+
 /*	for (size_t i=0; i< contents.size(); i++){
 		clsRepository->addObject( contents[i].getObject(), contents[i].getLayer() );
 	}//end for*/
 
-	clsRepository->clsModels[ clsRepository->currentModel ].addContent( c, currentLayer );	
-//	clsRepository->addComponent(c); 
+	clsRepository->clsModels[ clsRepository->currentModel ].addContent( c, currentLayer );
+//	clsRepository->addComponent(c);
 }
 
 // -----------------------------------------------------------------------------
@@ -306,9 +306,9 @@ void File::loadFileCIF( const string filename , const int ID) {
 
 	Color color;
 	clsRepository->currentModel = 0;
-	
+
 	undefineds.clear();
-	
+
 	while ( true ) {
 		file.getline( buffer, MAX_BUFFER_SIZE, '\n' );
 		//if ( file.eof() ) {cout<< "EOF\n"; break; }
@@ -338,38 +338,38 @@ void File::loadFileCIF( const string filename , const int ID) {
 
 		if ( whatIS == "E;" ||  whatIS == "END;" || whatIS == "E" || whatIS == "END" ) {
 			clsRepository->start();
-			return; 
+			return;
 		}// End of CIF File
 
-		
+
 		if ( whatIS[0] == '(' ) continue;
 
 		cerr << "[INFO] Ignoring line: " << inputLine.str() << "\n";
-		
+
 	} // end while
-	
+
 } // end function
 
 //==============================================================================================================
 //SAVE
 /*
 void File::SaveCIF(const string filename){
-	
+
 	ofstream file;
 	file.open(filename.c_str());
 
-	
+
 	file<<"\t(UFRGS - Universidade Federal do Rio Grande do Sul)\n"
 		<<"\t(GME - Group of Microeletronic)\n"
 		<<"\t(CIF generated by SightGL)\n"
 		<<"\t(Marilena Maule - mmaule@inf.ufrgs.br)\n"
-		<<"\t(Guilherme Flach- gaflach@inf.ufrgs.br)\n\n";	
-		
+		<<"\t(Guilherme Flach- gaflach@inf.ufrgs.br)\n\n";
+
 	file << "DS 1 1 1;\n";
 
 	for( int i = 0; i < clsRepository->getNumLayers() -1; i++){
 		Layer layer = clsRepository->getLayer(i);
-		if( !(layer.getNumObjects() == 0) ){ 
+		if( !(layer.getNumObjects() == 0) ){
 			file << "L " << layer.getName() << ";\n";
 		}
 		for( int j = 0; j < layer.getNumObjects(); j++){
@@ -382,22 +382,22 @@ void File::SaveCIF(const string filename){
 			int x = width/2 + min.x;
 			int y = height/2 + min.y;
 			file << "B " << width << " " << height << " " << x << " " << y << ";\n";
-		}//end for objects		
-	}//end for layers	
-	
+		}//end for objects
+	}//end for layers
+
 	Layer layer = clsRepository->getLayer(clsRepository->getNumLayers() - 1);
 	for(int i = 0; i < layer.getNumObjects();  i++){
 		Object * obj = layer.getObject( i );
 		Vertex min = obj->getMin();
 		string lbl = obj->getText();
-		
+
 		file << "94 "<< lbl << " " << min.x << " " << min.y << "\n";
 	}//for for labels
-	
-	file	<< "DF;\n"	
+
+	file	<< "DF;\n"
 			<< "C 1;\n"
 			<< "E;";
-	
+
 	file.close();
 
 }//end function */
@@ -418,29 +418,29 @@ string obtainExtension( const string &str ) {
 //==============================================================================================================
 //{TODO} LABELS!!
 void File::SaveCIF(string filename){
-	
+
 	ofstream file;
-	
+
 
 	if(obtainExtension(filename) != "cif"){ filename = filename + ".cif"; }
-	
+
 	file.open(filename.c_str());
 
-	
+
 	file<<"\t(UFRGS - Universidade Federal do Rio Grande do Sul)\n"
 		<<"\t(GME - Group of Microeletronic)\n"
 		<<"\t(CIF generated by SightGL)\n"
 		<<"\t(Marilena Maule - mmaule@inf.ufrgs.br)\n"
-		<<"\t(Guilherme Flach- gaflach@inf.ufrgs.br)\n\n";	
-		
+		<<"\t(Guilherme Flach- gaflach@inf.ufrgs.br)\n\n";
+
 	vector <Model> * models;
-	
+
 	models = clsRepository->getModelsPT();
-	
+
 	for(size_t i = 0; i < models->size(); i++ )	{
 		file << "DS "<< (*models)[i].getModelId() << " " << (*models)[i].getDVD() << " " << (*models)[i].getDVS() <<";\n";
 		file << "9 " << (*models)[i].getName() << ";\n";
-		
+
 		//find layers
 		vector <ObjectReference> objs;
 		(*models)[i].gimmeObjectsOnly(objs);
@@ -448,14 +448,14 @@ void File::SaveCIF(string filename){
 		while( !objs.empty() ){
 			int currentLayer = objs[0].getLayer();
 			if (currentLayer != 28 )//labels layer = 28 **CAUTION**
-				file << "L " << clsRepository->getLayer(currentLayer).getName() << ";\n";	
-			
-			bool stop = false;	
+				file << "L " << clsRepository->getLayer(currentLayer).getName() << ";\n";
+
+			bool stop = false;
 			for(size_t l = 0; l <  objs.size() && !stop; l++){
 				if(objs[l].getLayer() == currentLayer){
 					Object * obj  = objs[l].getObject();
 					stop = false;
-					switch (obj->getType()){					
+					switch (obj->getType()){
 						case OBJECT_RECTANGLE: {
 							Vertex min = obj->getMin();
 							Vertex max = obj->getMax();
@@ -465,18 +465,18 @@ void File::SaveCIF(string filename){
 							int y = height/2 + min.y;
 							file << "B " << width << " " << height << " " << x << " " << y << ";\n";
 						} break;
-						
+
 						case OBJECT_LABEL: {
 							Vertex min = obj->getMin();
-							string lbl = obj->getText();							
-							file << "94 "<< lbl << " " << min.x << " " << min.y << "\n";					
+							string lbl = obj->getText();
+							file << "94 "<< lbl << " " << min.x << " " << min.y << "\n";
 						} break;
-						
+
 						case OBJECT_WIRE:{}break;
 						case OBJECT_LINE:{}break;
 						case OBJECT_COMPONENT: break;
 					};// end switch
-					
+
 					objs[i] = objs.back();
 					objs.pop_back();
 				} else {
@@ -491,9 +491,9 @@ void File::SaveCIF(string filename){
 
 		file<<"DF;\n";
 	}//end for
-		
+
 	file	<< "E;";
-	
+
 	file.close();
 
 }//end function
