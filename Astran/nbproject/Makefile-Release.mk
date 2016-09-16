@@ -66,7 +66,7 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=`wx-config --cppflags --debug=no` -Wno-deprecated -std=c++14 -fpermissive
+CCFLAGS=`wx-config --version=2.8 --cppflags --debug=no` -Wno-deprecated -std=c++14 -fpermissive
 CXXFLAGS = $(CCFLAGS)
 
 # Fortran Compiler Flags
@@ -88,15 +88,15 @@ endif
 
 build/bin/Astran: ${OBJECTFILES}
 	${MKDIR} -p build/bin
-	${LINK.cc} -o build/bin/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
+	${LINK.cc} -o build/bin/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --version=2.8 --libs`
 
 build/bin/Astran.app/Contents/MacOS/Astran: ${OBJECTFILES}
 	${MKDIR} -p build/bin/Astran.app/Contents/MacOS
-	${LINK.cc} -o build/bin/Astran.app/Contents/MacOS/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
+	${LINK.cc} -o build/bin/Astran.app/Contents/MacOS/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --version=2.8 --libs`
 
 
 
-${OBJECTDIR}/src/autocell2.o: src/autocell2.cpp 
+${OBJECTDIR}/src/autocell2.o: src/autocell2.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/autocell2.o src/autocell2.cpp
