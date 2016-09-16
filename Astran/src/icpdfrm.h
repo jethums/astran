@@ -128,13 +128,15 @@ protected:
 	void command( wxCommandEvent& event );
 
 private:
+
     DesignMng designmng;
-    std::unique_ptr<WxRules> wxrules = std::make_unique<WxRules>(this);
-    std::unique_ptr<WxAutoCell> wxautocell = std::make_unique<WxAutoCell>(this);
-    std::unique_ptr<WxCircuit> wxcircuit = std::make_unique<WxCircuit>(this);
-    std::unique_ptr<WxFP> wxfp = std::make_unique<WxFP>(this);
-    std::unique_ptr<WxPreferences> wxpreferences = std::make_unique<WxPreferences>(this);
-    std::unique_ptr<WxAbout> wxabout = std::make_unique<WxAbout>(this);
+    WxRules *wxrules;
+    WxAutoCell *wxautocell;
+    WxCircuit *wxcircuit;
+    WxFP *wxfp;
+    WxPreferences *wxpreferences;
+    WxAbout *wxabout;
+    
     list <CLayout*> instanceLevel;
     int pos;
 
