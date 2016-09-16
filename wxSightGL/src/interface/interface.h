@@ -13,7 +13,7 @@
 #include <wx/splitter.h>
 #include <wx/filedlg.h>
 #include <wx/aboutdlg.h>
-#include <wx/toolbar.h> 
+#include <wx/toolbar.h>
 #include <wx/tbarbase.h>
 #include <wx/minifram.h>
 #include <wx/aui/aui.h>
@@ -31,34 +31,34 @@ class wxSightFrame: public wxFrame {
 
 		BasicGLPane * clsBasicGLPane;
 		wxString clsFilename;
-		
-		wxBoxSizer * topLayout;		
+
+		wxBoxSizer * topLayout;
 		wxToolBar * stateToolBar;
 		wxCheckListBox * checkListBox;
 		LayerList * clsLayerList;
 		wxSplitterWindow * splitter;
 		BasicGLPane * basic;
 		wxComboBox * clsModelsCombo;
-		
+
 		wxAuiManager * clsAuiManager;
-		
+
 		vector <wxString> clsModels;
-		
-		void CreateMenubar();	
+
+		void CreateMenubar();
 		void CreateToolbar();
-		void CreateStatusbar();	
-		
+		void CreateStatusbar();
+
 		void CreateLayerPane();
 		void CreateLayerListPane();
 		void CreateSightPane();
 		void CreateDebugPane();
-			
+
 	public:
 
     wxSightFrame( const wxString& title, const wxPoint& pos, const wxSize& size);
 
 	void Initialize();
-	
+
 	// -----------------------------------------------------------------------------
 //file menu
   void OnQuit(wxCommandEvent& event);
@@ -80,13 +80,13 @@ class wxSightFrame: public wxFrame {
 	void OnModel(wxCommandEvent& WXUNUSED(event));
 	void OnComponent(wxCommandEvent& WXUNUSED(event));
 	void editLabel(wxCommandEvent& WXUNUSED(event));
-// -----------------------------------------------------------------------------	
+// -----------------------------------------------------------------------------
 //view menu
 	void changeBgColor(wxCommandEvent& event);
 	void changeGuideColor(wxCommandEvent& event);
 	void showLabel(wxCommandEvent& event);
 	void showLayerList(wxCommandEvent& event);
-// -----------------------------------------------------------------------------	
+// -----------------------------------------------------------------------------
     void OnButtonClick(wxCommandEvent& event);
 	void clearRulers(wxCommandEvent& event);
 // -----------------------------------------------------------------------------
@@ -94,10 +94,10 @@ class wxSightFrame: public wxFrame {
 	void OnChangeSelectedLayer( wxLayerListEvent &event );
 	void OnShowLayer( wxLayerListEvent &event );
 // -----------------------------------------------------------------------------
-	void hideTool(wxCommandEvent& event);	
+	void hideTool(wxCommandEvent& event);
 	void setCompletTitle(wxString filename);
-	
-//state bar	
+
+//state bar
 	void selection(wxCommandEvent& event);
 	void wire(wxCommandEvent& event);
 	void rectangle(wxCommandEvent& event);
@@ -115,20 +115,20 @@ class wxSightFrame: public wxFrame {
 // -----------------------------------------------------------------------------
 	void printSnapShot();
 	void saveSnapShot(wxCommandEvent& event);
-	
+
 	void CreateModelList();
 	void CreateModelsCombo();
-	
+
 	void OnModelChoice(wxCommandEvent& event);
 	void SaveModel(wxCommandEvent& WXUNUSED(event));
 	void SaveModelAs(wxCommandEvent& WXUNUSED(event));
-	
+
 	//void keyPressed(wxKeyEvent& event);
 // -----------------------------------------------------------------------------
 
 void Ask(wxCommandEvent& WXUNUSED(event));
 
-	
+
     DECLARE_EVENT_TABLE()
 };
 
@@ -156,7 +156,7 @@ enum
 	ID_Save_Model,
 	ID_Reload,
 	ID_ASK,
- 
+
 	TOOL_BAR_TOP = 50,
 	SPLITTER,
 	CHECK_LIST_BOX_LAYERS,
@@ -166,12 +166,12 @@ enum
 	LINE,
 	RULER,
 	DRAG,
-	LABEL,	
+	LABEL,
 	ZOOMIN,
 	ZOOMOUT,
 	ZOOM,
 	MDL,
-	
+
 	CLEAR_RULERS
 
 };
