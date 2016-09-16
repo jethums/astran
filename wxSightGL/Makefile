@@ -59,7 +59,7 @@ build: .build-post
 .build-post: .build-impl
 # Add your post 'build' code here...
 	@ echo
-	@ echo "#> DONE! :) To test it NOW, execute:"	
+	@ echo "#> DONE! :) To test it NOW, execute:"
 	@ echo "$$(pwd)/build/bin/wxsightgl"
 	@ echo
 
