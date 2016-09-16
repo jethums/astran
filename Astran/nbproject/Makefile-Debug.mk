@@ -66,7 +66,7 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=`wx-config --cppflags --debug=yes` -Wno-deprecated -std=c++14 -fpermissive
+CCFLAGS=`wx-config --version=2.8 --cppflags --debug=yes` -Wno-deprecated -std=c++14 -fpermissive
 CXXFLAGS=$(CCFLAGS)
 
 # Fortran Compiler Flags
@@ -76,7 +76,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS = `wx-config --version=2.8 --libs`
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -88,11 +88,11 @@ endif
 
 build/bin/Astran: ${OBJECTFILES}
 	${MKDIR} -p build/bin
-	${LINK.cc} -o build/bin/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
+	${LINK.cc} -o build/bin/Astran ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 build/bin/Astran.app/Contents/MacOS/Astran: ${OBJECTFILES}
 	${MKDIR} -p build/bin/Astran.app/Contents/MacOS
-	${LINK.cc} -o build/bin/Astran.app/Contents/MacOS/Astran ${OBJECTFILES} ${LDLIBSOPTIONS} `wx-config --libs`
+	${LINK.cc} -o build/bin/Astran.app/Contents/MacOS/Astran ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 
 
