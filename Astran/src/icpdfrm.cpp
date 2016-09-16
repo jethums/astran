@@ -3,24 +3,30 @@
 /** Constructor */
 IcpdFrm::IcpdFrm( wxWindow* parent ):ICPD_frm( parent ){
 	wxLog::SetActiveTarget( new wxLogTextCtrl(wx_log));
-
+	
     new Redirector( wx_log, cout, false);
     new Redirector( wx_log, cerr, true);
-
+    
 	printHeader(cout, "", "");
-
+    
 	string astran_cfg;
     astran_cfg = "astran.cfg";
 
     wxString astran_path;
     ::wxGetEnv(wxT("ASTRAN_PATH"), &astran_path);
-
+	
 	if (wxDirExists(astran_path)) {
 		astran_cfg = string(wxString(astran_path).mb_str()) + "/bin/astran.cfg";
 	}
 
 	executeCommand(string("read \"" + astran_cfg + "\""));
-	refresh();
+    wxabout = new WxAbout(this);
+    wxrules = new WxRules(this);
+    wxautocell = new WxAutoCell(this);
+    wxcircuit = new WxCircuit(this);
+    wxfp = new WxFP(this);
+    wxpreferences = new WxPreferences(this);
+    refresh();
 }
 
 // functions that implement events
@@ -32,7 +38,7 @@ void IcpdFrm::OnClose(wxCloseEvent& event){
 
 void IcpdFrm::CmdKeyDown( wxKeyEvent& event ){
 	pos = designmng.getPosCmdLog();
-
+    
 	if (event.GetKeyCode() == WXK_UP && pos != 0){
 		--pos;
 		designmng.setPosCmdLog(pos);
@@ -70,7 +76,7 @@ void IcpdFrm::newDesign( wxCommandEvent& event ){
 	if(cmd!=wxT("")){
 		cmd=wxT("new design \"") + cmd + wxT("\"");
 		executeCommand(string(cmd.mb_str()));
-
+        
 		instanceLevel.clear();
 		refresh();
 	}
@@ -430,9 +436,8 @@ void IcpdFrm::printInstance( wxCommandEvent& event ){
 	wx_layouts->Select(wx_layouts->FindString(wxString::From8BitData(instanceLevel.back()->getName().c_str())));
 }
 
-
 void IcpdFrm::printCell( wxCommandEvent& event ){
-	wxString cmd = wxT("print cell ") + wx_cells->GetStringSelection();
+	wxString cmd = wxT("print cell ") + wx_cells->GetStringSelection(); 
 	executeCommand(string(cmd.mb_str()));
 }
 
@@ -470,16 +475,16 @@ void IcpdFrm::refresh(){
 		wx_layouts->Append(wxString::From8BitData(layouts_it->first.c_str()));
 	if (instanceLevel.size())
 		wx_layouts->Select(wx_layouts->FindString(wxString::From8BitData(instanceLevel.back()->getName().c_str())));
-
+    
     wx_cells->DeselectAll();
 	wx_cells->Clear();
 	map<string, CellNetlst>::iterator cells_it;
 	for(cells_it=designmng.getCircuit()->getCellNetlsts()->begin(); cells_it!=designmng.getCircuit()->getCellNetlsts()->end(); cells_it++)
 		wx_cells->Append(wxString::From8BitData(cells_it->first.c_str()));
-
+    
     instanceLevel.clear();
 	refreshInstanceList();
-
+    
     /*	wx_nets->Clear();
      map<string, list<Net> >::iterator tmp3_it;
      for(tmp3_it=designmng.getCircuit()->getNetList()->begin(); tmp3_it!=designmng.getCircuit()->getNetList()->end(); tmp3_it++)
@@ -491,7 +496,7 @@ void IcpdFrm::refresh(){
 	map<string, Circuit::Interface>::iterator tmp4_it;
 	for(tmp4_it=designmng.getCircuit()->getInterfaces()->begin(); tmp4_it!=designmng.getCircuit()->getInterfaces()->end(); tmp4_it++)
 		wx_interfaces->Append(wxString::From8BitData(tmp4_it->first.c_str()));
-
+    
 	wxautocell->refresh();
 	wxcircuit->refresh();
 	wxrules->refresh();

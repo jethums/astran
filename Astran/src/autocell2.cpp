@@ -272,7 +272,6 @@ void AutoCell::route(bool hPoly, bool increaseIntTracks, int reduceVRt, bool opt
     
     elements.clear();
     inoutPins.clear();
-    //rt = make_unique<GraphRouter>();
     rt = std::unique_ptr<GraphRouter>(new GraphRouter());
     
     //        currentCell->print();

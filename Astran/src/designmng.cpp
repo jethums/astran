@@ -210,7 +210,6 @@ bool DesignMng::readCommand(string cmd){
                     rules =  std::unique_ptr<Rules>(new Rules());
                     placer =  std::unique_ptr<Placer>(new Placer());
                     autocell =  std::unique_ptr<AutoCell>(new AutoCell());
-
                     circuit->setRules(rules.get());
                     placer->setCircuit(circuit.get());
                     router->setCircuit(circuit.get());
