@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov  6 2013)
+// C++ code generated with wxFormBuilder (version Feb 16 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -7,10 +7,6 @@
 
 #ifndef __WXINTERFACE_H__
 #define __WXINTERFACE_H__
-
-#include <wx/stdpaths.h>
-#include <wx/file.h>
-#include <wx/mstream.h>
 
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
@@ -53,13 +49,6 @@
 #define ID_refresh 1012
 #define ID_help 1013
 
-#define wxGetBitmapFromMemory(name) _wxGetBitmapFromMemory(name ## _img, sizeof(name ## _img))
-inline wxBitmap _wxGetBitmapFromMemory(const unsigned char *data, int length)
-{
-    wxMemoryInputStream is(data, length);
-    return wxBitmap(wxImage(is, wxBITMAP_TYPE_ANY, -1), -1);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 /// Class ICPD_frm
 ///////////////////////////////////////////////////////////////////////////////
@@ -82,6 +71,20 @@ class ICPD_frm : public wxFrame
 		wxMenu* menu_route;
 		wxMenu* menu_help;
 		wxToolBar* toolbar;
+		wxToolBarToolBase* tool_readscript; 
+		wxToolBarToolBase* tool_opentech; 
+		wxToolBarToolBase* tool_opennetlist; 
+		wxToolBarToolBase* tool_openlibrary; 
+		wxToolBarToolBase* tool_openplacement; 
+		wxToolBarToolBase* tool_savenetlist; 
+		wxToolBarToolBase* tool_savelayouts; 
+		wxToolBarToolBase* tool_savepl; 
+		wxToolBarToolBase* tool_rules; 
+		wxToolBarToolBase* tool_circuit; 
+		wxToolBarToolBase* tool_cellgen; 
+		wxToolBarToolBase* tool_preferences; 
+		wxToolBarToolBase* tool_refresh; 
+		wxToolBarToolBase* tool_help; 
 		wxStaticText* m_staticText6;
 		wxListBox* wx_layouts;
 		wxStaticText* m_staticText7;
@@ -157,7 +160,7 @@ class ICPD_frm : public wxFrame
 	
 	public:
 		
-		ICPD_frm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ASTRAN - GME/UFRGS"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,550 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		ICPD_frm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ASTRAN"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,550 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~ICPD_frm();
 	
@@ -446,6 +449,18 @@ class Design_Rules : public wxFrame
 		wxTextCtrl* wxGDSII;
 		wxStaticText* static_tech;
 		wxTextCtrl* wxTechVal;
+		wxStaticText* static_pdevice_svt;
+		wxTextCtrl* pdevice_svt;
+		wxStaticText* static_ndevice_svt;
+		wxTextCtrl* ndevice_svt;
+		wxStaticText* static_pdevice_lvt;
+		wxTextCtrl* pdevice_lvt;
+		wxStaticText* static_ndevice_lvt;
+		wxTextCtrl* ndevice_lvt;
+		wxStaticText* static_pdevice_hvt;
+		wxTextCtrl* pdevice_hvt;
+		wxStaticText* static_ndevice_hvt;
+		wxTextCtrl* ndevice_hvt;
 		wxButton* save_button;
 		wxButton* close_button;
 		
@@ -460,7 +475,7 @@ class Design_Rules : public wxFrame
 	
 	public:
 		
-		Design_Rules( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Design Rules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		Design_Rules( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Design Rules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 452,410 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~Design_Rules();
 	

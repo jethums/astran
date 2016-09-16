@@ -22,12 +22,11 @@
 #include "icpdfrm.h"
 #include <wx/wx.h>
 
-
 class HybridTraits : public wxGUIAppTraits{
 public:
     HybridTraits(bool gui_enabled) : wxGUIAppTraits(),
     gui_enabled(gui_enabled) {}
-    
+
 private:
     bool gui_enabled;
     bool show_commands;
@@ -36,10 +35,10 @@ private:
 class icpdFrmApp : public wxApp{
 public:
     wxString cmdFilename;
-    
+
 private:
     bool gui_enabled;
-    
+
     bool OnInit();
     int OnExit();
     bool Initialize(int& argc, wchar_t **argv);

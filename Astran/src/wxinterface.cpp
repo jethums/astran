@@ -1,12 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov  6 2013)
+// C++ code generated with wxFormBuilder (version Feb 16 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
 #include "wxinterface.h"
-#include "wxicons.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -17,6 +16,7 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	barra_menu = new wxMenuBar( 0 );
 	menu_file = new wxMenu();
 	file_new = new wxMenu();
+	wxMenuItem* file_newItem = new wxMenuItem( menu_file, wxID_ANY, wxT("New"), wxEmptyString, wxITEM_NORMAL, file_new );
 	wxMenuItem* new_design;
 	new_design = new wxMenuItem( file_new, wxID_ANY, wxString( wxT("Design") ) , wxEmptyString, wxITEM_NORMAL );
 	file_new->Append( new_design );
@@ -33,9 +33,10 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	new_layout = new wxMenuItem( file_new, wxID_ANY, wxString( wxT("Layout") ) , wxEmptyString, wxITEM_NORMAL );
 	file_new->Append( new_layout );
 	
-	menu_file->Append( -1, wxT("New"), file_new );
+	menu_file->Append( file_newItem );
 	
 	file_load = new wxMenu();
+	wxMenuItem* file_loadItem = new wxMenuItem( menu_file, wxID_ANY, wxT("Load"), wxEmptyString, wxITEM_NORMAL, file_load );
 	wxMenuItem* load_project;
 	load_project = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Project") ) , wxEmptyString, wxITEM_NORMAL );
 	file_load->Append( load_project );
@@ -45,36 +46,36 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* load_technology;
 	load_technology = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Technology") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	load_technology->SetBitmaps( wxGetBitmapFromMemory(load_tec));
-	#elif defined( __WXGTK__ )
-	load_technology->SetBitmap( wxGetBitmapFromMemory(load_tec));
+	load_technology->SetBitmaps( wxBitmap( wxT("../Images/load_tec.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	load_technology->SetBitmap( wxBitmap( wxT("../Images/load_tec.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_load->Append( load_technology );
 	
 	wxMenuItem* load_netlist;
 	load_netlist = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Netlist") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	load_netlist->SetBitmaps( wxGetBitmapFromMemory(load_net));
-	#elif defined( __WXGTK__ )
-	load_netlist->SetBitmap( wxGetBitmapFromMemory(load_net));
+	load_netlist->SetBitmaps( wxBitmap( wxT("../Images/load_net.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	load_netlist->SetBitmap( wxBitmap( wxT("../Images/load_net.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_load->Append( load_netlist );
 	
 	wxMenuItem* load_layouts;
 	load_layouts = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Layouts") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	load_layouts->SetBitmaps( wxGetBitmapFromMemory(load_lay));
-	#elif defined( __WXGTK__ )
-	load_layouts->SetBitmap( wxGetBitmapFromMemory(load_lay));
+	load_layouts->SetBitmaps( wxBitmap( wxT("../Images/load_lay.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	load_layouts->SetBitmap( wxBitmap( wxT("../Images/load_lay.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_load->Append( load_layouts );
 	
 	wxMenuItem* load_placement;
 	load_placement = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Placement") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	load_placement->SetBitmaps( wxGetBitmapFromMemory(load_pl));
-	#elif defined( __WXGTK__ )
-	load_placement->SetBitmap( wxGetBitmapFromMemory(load_pl));
+	load_placement->SetBitmaps( wxBitmap( wxT("../Images/load_pl.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	load_placement->SetBitmap( wxBitmap( wxT("../Images/load_pl.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_load->Append( load_placement );
 	
@@ -82,9 +83,10 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	load_routing = new wxMenuItem( file_load, wxID_ANY, wxString( wxT("Routing Rotdl") ) , wxEmptyString, wxITEM_NORMAL );
 	file_load->Append( load_routing );
 	
-	menu_file->Append( -1, wxT("Load"), file_load );
+	menu_file->Append( file_loadItem );
 	
 	file_save = new wxMenu();
+	wxMenuItem* file_saveItem = new wxMenuItem( menu_file, wxID_ANY, wxT("Save"), wxEmptyString, wxITEM_NORMAL, file_save );
 	wxMenuItem* save_project;
 	save_project = new wxMenuItem( file_save, wxID_ANY, wxString( wxT("Project") ) , wxEmptyString, wxITEM_NORMAL );
 	file_save->Append( save_project );
@@ -98,27 +100,27 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* save_netlist;
 	save_netlist = new wxMenuItem( file_save, wxID_ANY, wxString( wxT("Netlist") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	save_netlist->SetBitmaps( wxGetBitmapFromMemory(save_net));
-	#elif defined( __WXGTK__ )
-	save_netlist->SetBitmap( wxGetBitmapFromMemory(save_net));
+	save_netlist->SetBitmaps( wxBitmap( wxT("../Images/save_net.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	save_netlist->SetBitmap( wxBitmap( wxT("../Images/save_net.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_save->Append( save_netlist );
 	
 	wxMenuItem* save_layouts;
 	save_layouts = new wxMenuItem( file_save, wxID_ANY, wxString( wxT("Layouts") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	save_layouts->SetBitmaps(wxGetBitmapFromMemory(save_lay));
-	#elif defined( __WXGTK__ )
-	save_layouts->SetBitmap(wxGetBitmapFromMemory(save_lay));
+	save_layouts->SetBitmaps( wxBitmap( wxT("../Images/save_lay.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	save_layouts->SetBitmap( wxBitmap( wxT("../Images/save_lay.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_save->Append( save_layouts );
 	
 	wxMenuItem* save_placement;
 	save_placement = new wxMenuItem( file_save, wxID_ANY, wxString( wxT("Placement") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	save_placement->SetBitmaps(wxGetBitmapFromMemory(save_pl));
-	#elif defined( __WXGTK__ )
-	save_placement->SetBitmap(wxGetBitmapFromMemory(save_pl));
+	save_placement->SetBitmaps( wxBitmap( wxT("../Images/save_pl.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	save_placement->SetBitmap( wxBitmap( wxT("../Images/save_pl.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	file_save->Append( save_placement );
 	
@@ -126,9 +128,10 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	save_routing = new wxMenuItem( file_save, wxID_ANY, wxString( wxT("Routing Rotdl") ) , wxEmptyString, wxITEM_NORMAL );
 	file_save->Append( save_routing );
 	
-	menu_file->Append( -1, wxT("Save"), file_save );
+	menu_file->Append( file_saveItem );
 	
 	file_import = new wxMenu();
+	wxMenuItem* file_importItem = new wxMenuItem( menu_file, wxID_ANY, wxT("Import"), wxEmptyString, wxITEM_NORMAL, file_import );
 	wxMenuItem* import_netlist;
 	import_netlist = new wxMenuItem( file_import, wxID_ANY, wxString( wxT("Cadence Netlist") ) , wxEmptyString, wxITEM_NORMAL );
 	file_import->Append( import_netlist );
@@ -137,14 +140,15 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	import_lef = new wxMenuItem( file_import, wxID_ANY, wxString( wxT("LEF") ) , wxEmptyString, wxITEM_NORMAL );
 	file_import->Append( import_lef );
 	
-	menu_file->Append( -1, wxT("Import"), file_import );
+	menu_file->Append( file_importItem );
 	
 	file_export = new wxMenu();
+	wxMenuItem* file_exportItem = new wxMenuItem( menu_file, wxID_ANY, wxT("Export"), wxEmptyString, wxITEM_NORMAL, file_export );
 	wxMenuItem* export_cellLayout;
 	export_cellLayout = new wxMenuItem( file_export, wxID_ANY, wxString( wxT("Layout") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
 	export_cellLayout->SetBitmaps( wxNullBitmap );
-	#elif defined( __WXGTK__ )
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
 	export_cellLayout->SetBitmap( wxNullBitmap );
 	#endif
 	file_export->Append( export_cellLayout );
@@ -153,7 +157,7 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	export_cellsizes = new wxMenuItem( file_export, wxID_ANY, wxString( wxT("Cell Sizes") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
 	export_cellsizes->SetBitmaps( wxNullBitmap );
-	#elif defined( __WXGTK__ )
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
 	export_cellsizes->SetBitmap( wxNullBitmap );
 	#endif
 	file_export->Append( export_cellsizes );
@@ -162,16 +166,16 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	export_placement = new wxMenuItem( file_export, wxID_ANY, wxString( wxT("Placement") ) , wxEmptyString, wxITEM_NORMAL );
 	file_export->Append( export_placement );
 	
-	menu_file->Append( -1, wxT("Export"), file_export );
+	menu_file->Append( file_exportItem );
 	
 	menu_file->AppendSeparator();
 	
 	wxMenuItem* read_script;
 	read_script = new wxMenuItem( menu_file, wxID_ANY, wxString( wxT("Read Script") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	read_script->SetBitmaps(wxGetBitmapFromMemory(read_script));
-	#elif defined( __WXGTK__ )
-	read_script->SetBitmap(wxGetBitmapFromMemory(read_script));
+	read_script->SetBitmaps( wxBitmap( wxT("../Images/read_script.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	read_script->SetBitmap( wxBitmap( wxT("../Images/read_script.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_file->Append( read_script );
 	
@@ -184,9 +188,9 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* exit;
 	exit = new wxMenuItem( menu_file, wxID_ANY, wxString( wxT("Exit") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	exit->SetBitmaps( wxGetBitmapFromMemory(close));
-	#elif defined( __WXGTK__ )
-	exit->SetBitmap( wxGetBitmapFromMemory(close));
+	exit->SetBitmaps( wxBitmap( wxT("../Images/close.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	exit->SetBitmap( wxBitmap( wxT("../Images/close.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_file->Append( exit );
 	
@@ -196,31 +200,32 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* view_rules;
 	view_rules = new wxMenuItem( menu_view, wxID_ANY, wxString( wxT("Rules...") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	view_rules->SetBitmaps( wxGetBitmapFromMemory(view_rules));
-	#elif defined( __WXGTK__ )
-	view_rules->SetBitmap( wxGetBitmapFromMemory(view_rules));
+	view_rules->SetBitmaps( wxBitmap( wxT("../Images/view_rules.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	view_rules->SetBitmap( wxBitmap( wxT("../Images/view_rules.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_view->Append( view_rules );
 	
 	wxMenuItem* view_circuit;
 	view_circuit = new wxMenuItem( menu_view, wxID_ANY, wxString( wxT("Circuit...") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	view_circuit->SetBitmaps( wxGetBitmapFromMemory(view_cir));
-	#elif defined( __WXGTK__ )
-	view_circuit->SetBitmap( wxGetBitmapFromMemory(view_cir));
+	view_circuit->SetBitmaps( wxBitmap( wxT("../Images/view_cir.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	view_circuit->SetBitmap( wxBitmap( wxT("../Images/view_cir.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_view->Append( view_circuit );
 	
 	wxMenuItem* view_preferences;
 	view_preferences = new wxMenuItem( menu_view, wxID_ANY, wxString( wxT("Preferences...") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	view_preferences->SetBitmaps( wxGetBitmapFromMemory(view_pref));
-	#elif defined( __WXGTK__ )
-	view_preferences->SetBitmap( wxGetBitmapFromMemory(view_pref));
+	view_preferences->SetBitmaps( wxBitmap( wxT("../Images/view_pref.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	view_preferences->SetBitmap( wxBitmap( wxT("../Images/view_pref.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_view->Append( view_preferences );
 	
 	menu_size = new wxMenu();
+	wxMenuItem* menu_sizeItem = new wxMenuItem( menu_view, wxID_ANY, wxT("Size"), wxEmptyString, wxITEM_NORMAL, menu_size );
 	wxMenuItem* size_fo4;
 	size_fo4 = new wxMenuItem( menu_size, wxID_ANY, wxString( wxT("FO4 Method") ) , wxEmptyString, wxITEM_NORMAL );
 	menu_size->Append( size_fo4 );
@@ -233,7 +238,7 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_menuItem47 = new wxMenuItem( menu_size, wxID_ANY, wxString( wxT("Elmore Delay") ) , wxEmptyString, wxITEM_NORMAL );
 	menu_size->Append( m_menuItem47 );
 	
-	menu_view->Append( -1, wxT("Size"), menu_size );
+	menu_view->Append( menu_sizeItem );
 	
 	barra_menu->Append( menu_view, wxT("View") ); 
 	
@@ -241,9 +246,9 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* netlist_cellgen;
 	netlist_cellgen = new wxMenuItem( menu_cells, wxID_ANY, wxString( wxT("CellGen...") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	netlist_cellgen->SetBitmaps( wxGetBitmapFromMemory(view_cellgen));
-	#elif defined( __WXGTK__ )
-	netlist_cellgen->SetBitmap( wxGetBitmapFromMemory(view_cellgen));
+	netlist_cellgen->SetBitmaps( wxBitmap( wxT("../Images/view_cellgen.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	netlist_cellgen->SetBitmap( wxBitmap( wxT("../Images/view_cellgen.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_cells->Append( netlist_cellgen );
 	
@@ -311,9 +316,9 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxMenuItem* help_about;
 	help_about = new wxMenuItem( menu_help, wxID_ANY, wxString( wxT("About ICPD") ) , wxEmptyString, wxITEM_NORMAL );
 	#ifdef __WXMSW__
-	help_about->SetBitmaps( wxGetBitmapFromMemory(help));
-	#elif defined( __WXGTK__ )
-	help_about->SetBitmap( wxGetBitmapFromMemory(help));
+	help_about->SetBitmaps( wxBitmap( wxT("../Images/help.png"), wxBITMAP_TYPE_ANY ) );
+	#elif (defined( __WXGTK__ ) || defined( __WXOSX__ ))
+	help_about->SetBitmap( wxBitmap( wxT("../Images/help.png"), wxBITMAP_TYPE_ANY ) );
 	#endif
 	menu_help->Append( help_about );
 	
@@ -326,43 +331,43 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->SetMenuBar( barra_menu );
 	
 	toolbar = this->CreateToolBar( wxTB_FLAT|wxTB_HORIZONTAL, wxID_ANY ); 
-	toolbar->AddTool( ID_readscript, wxT("tool_readscript"), wxGetBitmapFromMemory(read_script), wxNullBitmap, wxITEM_NORMAL, wxT("Read Script"), wxEmptyString, NULL );
+	tool_readscript = toolbar->AddTool( ID_readscript, wxT("tool_readscript"), wxBitmap( wxT("Images/read_script.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Read Script"), wxEmptyString, NULL ); 
 	
 	toolbar->AddSeparator(); 
 	
-	toolbar->AddTool( ID_opentech, wxT("tool_opentech"), wxGetBitmapFromMemory(load_tec), wxNullBitmap, wxITEM_NORMAL, wxT("Load Technology"), wxEmptyString, NULL );
+	tool_opentech = toolbar->AddTool( ID_opentech, wxT("tool_opentech"), wxBitmap( wxT("Images/load_tec.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Load Technology"), wxEmptyString, NULL ); 
 	
-	toolbar->AddTool( ID_opennetlist, wxT("tool_opennetlist"), wxGetBitmapFromMemory(load_net), wxNullBitmap, wxITEM_NORMAL, wxT("Load Netlist"), wxEmptyString, NULL );
+	tool_opennetlist = toolbar->AddTool( ID_opennetlist, wxT("tool_opennetlist"), wxBitmap( wxT("Images/load_net.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Load Netlist"), wxEmptyString, NULL ); 
 	
-	toolbar->AddTool( ID_openlibrary, wxT("tool_openlibrary"), wxGetBitmapFromMemory(load_lay), wxNullBitmap, wxITEM_NORMAL, wxT("Load Layouts"), wxEmptyString, NULL );
+	tool_openlibrary = toolbar->AddTool( ID_openlibrary, wxT("tool_openlibrary"), wxBitmap( wxT("Images/load_lay.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Load Layouts"), wxEmptyString, NULL ); 
 	
-	toolbar->AddTool( ID_openplacement, wxT("tool_openplacement"), wxGetBitmapFromMemory(load_pl), wxNullBitmap, wxITEM_NORMAL, wxT("Load Placement"), wxEmptyString, NULL );
-	
-	toolbar->AddSeparator(); 
-	
-	toolbar->AddTool( ID_savenetlist, wxT("tool_savenetlist"), wxGetBitmapFromMemory(save_net), wxNullBitmap, wxITEM_NORMAL, wxT("Save Netlist"), wxEmptyString, NULL );
-	
-	toolbar->AddTool( ID_savelayout, wxT("tool_savelayouts"), wxGetBitmapFromMemory(save_lay), wxNullBitmap, wxITEM_NORMAL, wxT("Save Layouts"), wxEmptyString, NULL );
-	
-	toolbar->AddTool( ID_savepl, wxT("tool_savepl"), wxGetBitmapFromMemory(save_pl), wxNullBitmap, wxITEM_NORMAL, wxT("Save Placement"), wxEmptyString, NULL );
+	tool_openplacement = toolbar->AddTool( ID_openplacement, wxT("tool_openplacement"), wxBitmap( wxT("Images/load_pl.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Load Placement"), wxEmptyString, NULL ); 
 	
 	toolbar->AddSeparator(); 
 	
-	toolbar->AddTool( ID_rules, wxT("tool_rules"), wxGetBitmapFromMemory(view_rules), wxNullBitmap, wxITEM_NORMAL, wxT("View Rules"), wxEmptyString, NULL );
+	tool_savenetlist = toolbar->AddTool( ID_savenetlist, wxT("tool_savenetlist"), wxBitmap( wxT("Images/save_net.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Save Netlist"), wxEmptyString, NULL ); 
 	
-	toolbar->AddTool( ID_circuit, wxT("tool_circuit"), wxGetBitmapFromMemory(view_cir), wxNullBitmap, wxITEM_NORMAL, wxT("View Circuit"), wxEmptyString, NULL );
+	tool_savelayouts = toolbar->AddTool( ID_savelayout, wxT("tool_savelayouts"), wxBitmap( wxT("Images/save_lay.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Save Layouts"), wxEmptyString, NULL ); 
 	
-	toolbar->AddTool( ID_cellgen, wxT("tool_cellgen"), wxGetBitmapFromMemory(view_cellgen), wxNullBitmap, wxITEM_NORMAL, wxT("View CellGen"), wxEmptyString, NULL );
-	
-	toolbar->AddTool( ID_preferences, wxT("tool_preferences"), wxGetBitmapFromMemory(view_pref), wxNullBitmap, wxITEM_NORMAL, wxT("View Preferences"), wxEmptyString, NULL );
+	tool_savepl = toolbar->AddTool( ID_savepl, wxT("tool_savepl"), wxBitmap( wxT("Images/save_pl.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Save Placement"), wxEmptyString, NULL ); 
 	
 	toolbar->AddSeparator(); 
 	
-	toolbar->AddTool( ID_refresh, wxT("tool_refresh"), wxGetBitmapFromMemory(refresh), wxNullBitmap, wxITEM_NORMAL, wxT("Refresh"), wxEmptyString, NULL );
+	tool_rules = toolbar->AddTool( ID_rules, wxT("tool_rules"), wxBitmap( wxT("Images/view_rules.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("View Rules"), wxEmptyString, NULL ); 
+	
+	tool_circuit = toolbar->AddTool( ID_circuit, wxT("tool_circuit"), wxBitmap( wxT("Images/view_cir.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("View Circuit"), wxEmptyString, NULL ); 
+	
+	tool_cellgen = toolbar->AddTool( ID_cellgen, wxT("tool_cellgen"), wxBitmap( wxT("Images/view_cellgen.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("View CellGen"), wxEmptyString, NULL ); 
+	
+	tool_preferences = toolbar->AddTool( ID_preferences, wxT("tool_preferences"), wxBitmap( wxT("Images/view_pref.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("View Preferences"), wxEmptyString, NULL ); 
 	
 	toolbar->AddSeparator(); 
 	
-	toolbar->AddTool( ID_help, wxT("tool_help"), wxGetBitmapFromMemory(help), wxNullBitmap, wxITEM_NORMAL, wxT("Help"), wxEmptyString, NULL );
+	tool_refresh = toolbar->AddTool( ID_refresh, wxT("tool_refresh"), wxBitmap( wxT("Images/refresh.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Refresh"), wxEmptyString, NULL ); 
+	
+	toolbar->AddSeparator(); 
+	
+	tool_help = toolbar->AddTool( ID_help, wxT("tool_help"), wxBitmap( wxT("Images/help.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, wxT("Help"), wxEmptyString, NULL ); 
 	
 	toolbar->Realize(); 
 	
@@ -443,20 +448,21 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxVERTICAL );
 	
-	// wxTE_MULTILINE|
-	wx_log = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY );
-	// wx_log->SetMaxLength( 0 ); 
+	wx_log = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY );
+	wx_log->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_APPWORKSPACE ) );
+	
 	bSizer9->Add( wx_log, 1, wxALL|wxEXPAND, 5 );
+	
+	
 	bSizer2->Add( bSizer9, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	wxCommand = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
-	wxCommand->SetMaxLength( 0 ); 
 	bSizer2->Add( wxCommand, 0, wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 0 );
 	
 	
 	this->SetSizer( bSizer2 );
 	this->Layout();
-	statusBar = this->CreateStatusBar( 2, wxST_SIZEGRIP, wxID_ANY );
+	statusBar = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
 	
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( ICPD_frm::OnClose ) );
@@ -508,20 +514,20 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Connect( help_about->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
 	this->Connect( help_homepage->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( ICPD_frm::helpHP ) );
 	toolbar->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( ICPD_frm::PressedKey ), NULL, this );
-	this->Connect( ID_readscript, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::flReadScript ) );
-	this->Connect( ID_opentech, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadTech ) );
-	this->Connect( ID_opennetlist, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadSpiceNetlist ) );
-	this->Connect( ID_openlibrary, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadLayouts ) );
-	this->Connect( ID_openplacement, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadPlacement ) );
-	this->Connect( ID_savenetlist, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveSpiceNetlist ) );
-	this->Connect( ID_savelayout, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveLayouts ) );
-	this->Connect( ID_savepl, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::savePlacement ) );
-	this->Connect( ID_rules, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showTech ) );
-	this->Connect( ID_circuit, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCircuit ) );
-	this->Connect( ID_cellgen, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCellgen ) );
-	this->Connect( ID_preferences, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showPreferences ) );
-	this->Connect( ID_refresh, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::refreshIcon ) );
-	this->Connect( ID_help, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
+	this->Connect( tool_readscript->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::flReadScript ) );
+	this->Connect( tool_opentech->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadTech ) );
+	this->Connect( tool_opennetlist->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadSpiceNetlist ) );
+	this->Connect( tool_openlibrary->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadLayouts ) );
+	this->Connect( tool_openplacement->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadPlacement ) );
+	this->Connect( tool_savenetlist->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveSpiceNetlist ) );
+	this->Connect( tool_savelayouts->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveLayouts ) );
+	this->Connect( tool_savepl->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::savePlacement ) );
+	this->Connect( tool_rules->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showTech ) );
+	this->Connect( tool_circuit->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCircuit ) );
+	this->Connect( tool_cellgen->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCellgen ) );
+	this->Connect( tool_preferences->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showPreferences ) );
+	this->Connect( tool_refresh->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::refreshIcon ) );
+	this->Connect( tool_help->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
 	wx_layouts->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( ICPD_frm::PressedKey ), NULL, this );
 	wx_layouts->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( ICPD_frm::layoutListEvent ), NULL, this );
 	wx_layouts->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( ICPD_frm::viewLayout ), NULL, this );
@@ -592,20 +598,20 @@ ICPD_frm::~ICPD_frm()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( ICPD_frm::helpHP ) );
 	toolbar->Disconnect( wxEVT_KEY_DOWN, wxKeyEventHandler( ICPD_frm::PressedKey ), NULL, this );
-	this->Disconnect( ID_readscript, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::flReadScript ) );
-	this->Disconnect( ID_opentech, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadTech ) );
-	this->Disconnect( ID_opennetlist, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadSpiceNetlist ) );
-	this->Disconnect( ID_openlibrary, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadLayouts ) );
-	this->Disconnect( ID_openplacement, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadPlacement ) );
-	this->Disconnect( ID_savenetlist, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveSpiceNetlist ) );
-	this->Disconnect( ID_savelayout, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveLayouts ) );
-	this->Disconnect( ID_savepl, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::savePlacement ) );
-	this->Disconnect( ID_rules, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showTech ) );
-	this->Disconnect( ID_circuit, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCircuit ) );
-	this->Disconnect( ID_cellgen, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCellgen ) );
-	this->Disconnect( ID_preferences, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showPreferences ) );
-	this->Disconnect( ID_refresh, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::refreshIcon ) );
-	this->Disconnect( ID_help, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
+	this->Disconnect( tool_readscript->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::flReadScript ) );
+	this->Disconnect( tool_opentech->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadTech ) );
+	this->Disconnect( tool_opennetlist->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadSpiceNetlist ) );
+	this->Disconnect( tool_openlibrary->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadLayouts ) );
+	this->Disconnect( tool_openplacement->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::loadPlacement ) );
+	this->Disconnect( tool_savenetlist->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveSpiceNetlist ) );
+	this->Disconnect( tool_savelayouts->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::saveLayouts ) );
+	this->Disconnect( tool_savepl->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::savePlacement ) );
+	this->Disconnect( tool_rules->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showTech ) );
+	this->Disconnect( tool_circuit->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCircuit ) );
+	this->Disconnect( tool_cellgen->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showCellgen ) );
+	this->Disconnect( tool_preferences->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::showPreferences ) );
+	this->Disconnect( tool_refresh->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::refreshIcon ) );
+	this->Disconnect( tool_help->GetId(), wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( ICPD_frm::HelpaboutClick ) );
 	wx_layouts->Disconnect( wxEVT_KEY_DOWN, wxKeyEventHandler( ICPD_frm::PressedKey ), NULL, this );
 	wx_layouts->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( ICPD_frm::layoutListEvent ), NULL, this );
 	wx_layouts->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( ICPD_frm::viewLayout ), NULL, this );
@@ -654,7 +660,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_rows, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxNrRows = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxNrRows->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxNrRows, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -668,7 +673,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_coreutil, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxUtilization = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxUtilization->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxUtilization, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -707,7 +711,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_cleft, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxC2L = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxC2L->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxC2L, 0, wxALL|wxEXPAND, 5 );
 	
 	static_ctop = new wxStaticText( this, wxID_ANY, wxT("Core to Top:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -715,7 +718,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_ctop, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxC2T = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxC2T->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxC2T, 0, wxALL|wxEXPAND, 5 );
 	
 	static_cright = new wxStaticText( this, wxID_ANY, wxT("Core to Right:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -723,7 +725,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_cright, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxC2R = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxC2R->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxC2R, 0, wxALL|wxEXPAND, 5 );
 	
 	static_cbottom = new wxStaticText( this, wxID_ANY, wxT("Core to Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -731,7 +732,6 @@ Specify_FP::Specify_FP( wxWindow* parent, wxWindowID id, const wxString& title, 
 	fgSizer8->Add( static_cbottom, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxC2B = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
-	wxC2B->SetMaxLength( 0 ); 
 	fgSizer8->Add( wxC2B, 0, wxALL|wxEXPAND, 5 );
 	
 	
@@ -826,7 +826,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( m_staticText50, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	nrIntTracks = new wxTextCtrl( this, wxID_ANY, wxT("2"), wxDefaultPosition, wxDefaultSize, 0 );
-	nrIntTracks->SetMaxLength( 0 ); 
 	fgSizer6->Add( nrIntTracks, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	fold_button = new wxButton( this, wxID_ANY, wxT("&Fold Tr."), wxDefaultPosition, wxDefaultSize, 0 );
@@ -852,7 +851,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_widcost, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_WC = new wxTextCtrl( this, wxID_ANY, wxT("3"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_WC->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_WC, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_gatemmcost = new wxStaticText( this, wxID_ANY, wxT("Gate Missmatch Cost:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -860,7 +858,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_gatemmcost, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_GMC = new wxTextCtrl( this, wxID_ANY, wxT("4"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_GMC->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_GMC, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -871,7 +868,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_rtcost, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_RC = new wxTextCtrl( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_RC->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_RC, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_rtdenscost = new wxStaticText( this, wxID_ANY, wxT("Routing Density Cost:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -879,7 +875,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_rtdenscost, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_RTDC = new wxTextCtrl( this, wxID_ANY, wxT("4"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_RTDC->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_RTDC, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -890,7 +885,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_gapcost, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_NGC = new wxTextCtrl( this, wxID_ANY, wxT("2"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_NGC->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_NGC, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -907,7 +901,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_taqual, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_TAQ = new wxTextCtrl( this, wxID_ANY, wxT("150"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_TAQ->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_TAQ, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_numatt = new wxStaticText( this, wxID_ANY, wxT("Nr. of attempts:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -915,7 +908,6 @@ CellGen::CellGen( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	fgSizer6->Add( static_numatt, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	p_NRA = new wxTextCtrl( this, wxID_ANY, wxT("3"), wxDefaultPosition, wxDefaultSize, 0 );
-	p_NRA->SetMaxLength( 0 ); 
 	fgSizer6->Add( p_NRA, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	place_button = new wxButton( this, wxID_ANY, wxT("&Place Tr."), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1180,7 +1172,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_design, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	design_name = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0 );
-	design_name->SetMaxLength( 0 ); 
 	fgSizer3->Add( design_name, 0, wxALL|wxEXPAND, 5 );
 	
 	static_horizontal = new wxStaticText( this, wxID_ANY, wxT("Horizontal Grid:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1188,7 +1179,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_horizontal, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	horizontalgrid = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	horizontalgrid->SetMaxLength( 0 ); 
 	fgSizer3->Add( horizontalgrid, 0, wxALL|wxEXPAND, 5 );
 	
 	static_vertical = new wxStaticText( this, wxID_ANY, wxT("Vertical Grid:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1196,7 +1186,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_vertical, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	verticalgrid = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	verticalgrid->SetMaxLength( 0 ); 
 	fgSizer3->Add( verticalgrid, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticText60 = new wxStaticText( this, wxID_ANY, wxT("H Grid Offset:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1218,7 +1207,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_vdd, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	vddnetname = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	vddnetname->SetMaxLength( 0 ); 
 	fgSizer3->Add( vddnetname, 0, wxALL|wxEXPAND, 5 );
 	
 	static_gnd = new wxStaticText( this, wxID_ANY, wxT("Gnd Net Name:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1226,7 +1214,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_gnd, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	gndnetname = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gndnetname->SetMaxLength( 0 ); 
 	fgSizer3->Add( gndnetname, 0, wxALL|wxEXPAND, 5 );
 	
 	static_row = new wxStaticText( this, wxID_ANY, wxT("Row Height:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1234,7 +1221,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_row, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	rowheight = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	rowheight->SetMaxLength( 0 ); 
 	fgSizer3->Add( rowheight, 0, wxALL|wxEXPAND, 5 );
 	
 	static_supply = new wxStaticText( this, wxID_ANY, wxT("Supply Size:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1242,7 +1228,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_supply, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	supplysize = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	supplysize->SetMaxLength( 0 ); 
 	fgSizer3->Add( supplysize, 0, wxALL|wxEXPAND, 5 );
 	
 	static_supply1 = new wxStaticText( this, wxID_ANY, wxT("nWell Position:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1250,7 +1235,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_supply1, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	nWellPos = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	nWellPos->SetMaxLength( 0 ); 
 	fgSizer3->Add( nWellPos, 0, wxALL|wxEXPAND, 5 );
 	
 	static_supply12 = new wxStaticText( this, wxID_ANY, wxT("nWell Border:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1258,7 +1242,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_supply12, 0, wxALL|wxALIGN_RIGHT, 5 );
 	
 	nWellBorder = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	nWellBorder->SetMaxLength( 0 ); 
 	fgSizer3->Add( nWellBorder, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_supply121 = new wxStaticText( this, wxID_ANY, wxT("pnSel Border:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1266,7 +1249,6 @@ View_Circuit::View_Circuit( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer3->Add( static_supply121, 0, wxALL|wxALIGN_RIGHT, 5 );
 	
 	pnSelBorder = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	pnSelBorder->SetMaxLength( 0 ); 
 	fgSizer3->Add( pnSelBorder, 0, wxALL|wxEXPAND, 5 );
 	
 	static_supply11 = new wxStaticText( this, wxID_ANY, wxT("StdCell Template:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1346,7 +1328,6 @@ View_Preferences::View_Preferences( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer4->Add( static_plPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	plPath = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,-1 ), 0 );
-	plPath->SetMaxLength( 0 ); 
 	fgSizer4->Add( plPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	plPath_button = new wxButton( this, wxID_ANY, wxT("Choose"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1357,7 +1338,6 @@ View_Preferences::View_Preferences( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer4->Add( static_rotdl, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	rotdlPath = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	rotdlPath->SetMaxLength( 0 ); 
 	fgSizer4->Add( rotdlPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	rotdlPath_button = new wxButton( this, wxID_ANY, wxT("Choose"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1368,7 +1348,6 @@ View_Preferences::View_Preferences( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer4->Add( static_viewer, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	viewerPath = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	viewerPath->SetMaxLength( 0 ); 
 	fgSizer4->Add( viewerPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	viewerPath_button = new wxButton( this, wxID_ANY, wxT("Choose"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1379,7 +1358,6 @@ View_Preferences::View_Preferences( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer4->Add( static_lpsolver, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	lpsolverPath = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	lpsolverPath->SetMaxLength( 0 ); 
 	fgSizer4->Add( lpsolverPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	lpsolverPath_button = new wxButton( this, wxID_ANY, wxT("Choose"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1390,7 +1368,6 @@ View_Preferences::View_Preferences( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer4->Add( static_logf, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	logPath = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	logPath->SetMaxLength( 0 ); 
 	fgSizer4->Add( logPath, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	logPath_button = new wxButton( this, wxID_ANY, wxT("Choose"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1466,7 +1443,7 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer2;
-	fgSizer2 = new wxFlexGridSizer( 8, 4, 0, 0 );
+	fgSizer2 = new wxFlexGridSizer( 11, 4, 0, 0 );
 	fgSizer2->SetFlexibleDirection( wxBOTH );
 	fgSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -1475,7 +1452,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_technology, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxTechName = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
-	wxTechName->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxTechName, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
 	
 	static_soi = new wxStaticText( this, wxID_ANY, wxT("SOI:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1490,7 +1466,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_mlayers, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	wxMLayers = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxMLayers->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxMLayers, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_resolution = new wxStaticText( this, wxID_ANY, wxT("Resolution:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1498,7 +1473,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_resolution, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	wxResolution = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
-	wxResolution->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxResolution, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_rule = new wxStaticText( this, wxID_ANY, wxT("Rule:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1522,7 +1496,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_value, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	wxRule_Value = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxRule_Value->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxRule_Value, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	
@@ -1552,7 +1525,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_cif, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxCIF = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxCIF->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxCIF, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_gds = new wxStaticText( this, wxID_ANY, wxT("GDSII:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1560,7 +1532,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_gds, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	wxGDSII = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxGDSII->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxGDSII, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 	
 	static_tech = new wxStaticText( this, wxID_ANY, wxT("Tech:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1568,8 +1539,93 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer2->Add( static_tech, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	wxTechVal = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxTechVal->SetMaxLength( 0 ); 
 	fgSizer2->Add( wxTechVal, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	static_pdevice_svt = new wxStaticText( this, wxID_ANY, wxT("P Device SVt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_pdevice_svt->Wrap( -1 );
+	fgSizer2->Add( static_pdevice_svt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	pdevice_svt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( pdevice_svt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	static_ndevice_svt = new wxStaticText( this, wxID_ANY, wxT("N Device SVt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_ndevice_svt->Wrap( -1 );
+	fgSizer2->Add( static_ndevice_svt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	ndevice_svt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( ndevice_svt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	static_pdevice_lvt = new wxStaticText( this, wxID_ANY, wxT("P Device LVt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_pdevice_lvt->Wrap( -1 );
+	fgSizer2->Add( static_pdevice_lvt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	pdevice_lvt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	pdevice_lvt->Enable( false );
+	
+	fgSizer2->Add( pdevice_lvt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	static_ndevice_lvt = new wxStaticText( this, wxID_ANY, wxT("N Device LVt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_ndevice_lvt->Wrap( -1 );
+	fgSizer2->Add( static_ndevice_lvt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	ndevice_lvt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	ndevice_lvt->Enable( false );
+	
+	fgSizer2->Add( ndevice_lvt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	static_pdevice_hvt = new wxStaticText( this, wxID_ANY, wxT("P Device HVt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_pdevice_hvt->Wrap( -1 );
+	fgSizer2->Add( static_pdevice_hvt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	pdevice_hvt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	pdevice_hvt->Enable( false );
+	
+	fgSizer2->Add( pdevice_hvt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	static_ndevice_hvt = new wxStaticText( this, wxID_ANY, wxT("N Device HVt"), wxDefaultPosition, wxDefaultSize, 0 );
+	static_ndevice_hvt->Wrap( -1 );
+	fgSizer2->Add( static_ndevice_hvt, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	
+	ndevice_hvt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	ndevice_hvt->Enable( false );
+	
+	fgSizer2->Add( ndevice_hvt, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
 	
 	
 	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
@@ -1592,7 +1648,6 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	this->SetSizer( fgSizer2 );
 	this->Layout();
-	fgSizer2->Fit( this );
 	
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( Design_Rules::hide ) );
@@ -1722,7 +1777,6 @@ View_PrintGP::View_PrintGP( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer6->Add( static_design112, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	parameterCload = new wxTextCtrl( this, wxID_ANY, wxT("4*1.434879e-16"), wxDefaultPosition, wxSize( 150,-1 ), 0 );
-	parameterCload->SetMaxLength( 0 ); 
 	fgSizer6->Add( parameterCload, 0, wxALL|wxEXPAND, 5 );
 	
 	static_design111 = new wxStaticText( this, wxID_ANY, wxT("Max Area:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1730,7 +1784,6 @@ View_PrintGP::View_PrintGP( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer6->Add( static_design111, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	parameterMaxArea = new wxTextCtrl( this, wxID_ANY, wxT("3.255"), wxDefaultPosition, wxDefaultSize, 0 );
-	parameterMaxArea->SetMaxLength( 0 ); 
 	fgSizer6->Add( parameterMaxArea, 0, wxALL|wxEXPAND, 5 );
 	
 	static_design1111 = new wxStaticText( this, wxID_ANY, wxT("Max Delay:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1738,7 +1791,6 @@ View_PrintGP::View_PrintGP( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer6->Add( static_design1111, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	parameterDelay = new wxTextCtrl( this, wxID_ANY, wxT("4.29113e-10"), wxDefaultPosition, wxDefaultSize, 0 );
-	parameterDelay->SetMaxLength( 0 ); 
 	fgSizer6->Add( parameterDelay, 0, wxALL|wxEXPAND, 5 );
 	
 	static_design11111 = new wxStaticText( this, wxID_ANY, wxT("Max Cin:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1746,7 +1798,6 @@ View_PrintGP::View_PrintGP( wxWindow* parent, wxWindowID id, const wxString& tit
 	fgSizer6->Add( static_design11111, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	parameterMaxCin = new wxTextCtrl( this, wxID_ANY, wxT("1.0001"), wxDefaultPosition, wxDefaultSize, 0 );
-	parameterMaxCin->SetMaxLength( 0 ); 
 	fgSizer6->Add( parameterMaxCin, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	ok_button = new wxButton( this, wxID_ANY, wxT("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
