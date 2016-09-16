@@ -1,5 +1,5 @@
 /* XPM */
-char const *load_net.xpm[] = {
+char const *load_net_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 65 1 ",
 "  c #01017F",

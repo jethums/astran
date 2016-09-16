@@ -1,5 +1,5 @@
 /* XPM */
-char const *view_cir.xpm[] = {
+char const *view_cir_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 114 2 ",
 "   c #00007F",

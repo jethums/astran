@@ -1,5 +1,5 @@
 /* XPM */
-char const *view_pref.xpm[] = {
+char const *view_pref_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 95 2 ",
 "   c #1D0775",

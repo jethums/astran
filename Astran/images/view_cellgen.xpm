@@ -1,5 +1,5 @@
 /* XPM */
-char const *view_cellgen.xpm[] = {
+char const *view_cellgen_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 125 2 ",
 "   c #01007F",

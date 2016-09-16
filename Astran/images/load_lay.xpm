@@ -1,5 +1,5 @@
 /* XPM */
-char const *load_lay.xpm[] = {
+char const *load_lay_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 46 1 ",
 "  c #271A72",

@@ -1,5 +1,5 @@
 /* XPM */
-char const *save_lay.xpm[] = {
+char const *save_lay_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 68 1 ",
 "  c navy",

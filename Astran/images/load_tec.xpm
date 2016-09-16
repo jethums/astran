@@ -1,5 +1,5 @@
 /* XPM */
-char const *load_tec.xpm[] = {
+char const *load_tec_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "22 22 47 1 ",
 "  c #301F6F",
