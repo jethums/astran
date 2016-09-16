@@ -56,6 +56,7 @@ class wxSightFrame: public wxFrame {
 	public:
 
     wxSightFrame( const wxString& title, const wxPoint& pos, const wxSize& size);
+	~wxSightFrame();
 
 	void Initialize();
 

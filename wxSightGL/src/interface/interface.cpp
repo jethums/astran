@@ -127,6 +127,21 @@ wxSightFrame::wxSightFrame( const wxString& title, const wxPoint& pos, const wxS
 {
 } // end constructor
 
+wxSightFrame::~wxSightFrame()
+{
+	this->Disconnect();
+	clsBasicGLPane->Disconnect();
+	// clsFilename->Disconnect();
+	// topLayout->Disconnect();
+	stateToolBar->Disconnect();
+	checkListBox->Disconnect();
+	clsLayerList->Disconnect();
+	splitter->Disconnect();
+	basic->Disconnect();
+	clsModelsCombo->Disconnect();
+	clsAuiManager->UnInit();
+}
+
 // -----------------------------------------------------------------------------
 
 void wxSightFrame::Initialize() {
