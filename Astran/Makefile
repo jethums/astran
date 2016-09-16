@@ -59,7 +59,7 @@ build: .build-post
 .build-post: .build-impl
 # Add your post 'build' code here...
 	@ echo
-	@ echo "#> DONE! :) To test it NOW, execute:"	
+	@ echo "#> DONE! :) To test it NOW, execute:"
 	@ echo "export ASTRAN_PATH=$$(pwd)/build"
 	@ echo "$$(pwd)/build/bin/Astran [--shell]"
 	@ echo
@@ -125,8 +125,18 @@ help: .help-post
 # Add your post 'help' code here...
 
 
+ifeq ($(shell hostname),kriti)
+export LD_LIBRARY_PATH=/usr/lib64/
+export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
+export CCC=/opt/centos/devtoolset-1.1/root/usr/bin/g++
+export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
+export AS=/opt/centos/devtoolset-1.1/root/usr/libexec/gcc/x86_64-CentOS-linux/4.7.2/as
+endif
+
 # include project implementation makefile
 include nbproject/Makefile-impl.mk
 
 # include project make variables
 include nbproject/Makefile-variables.mk
+
+
