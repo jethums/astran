@@ -11,7 +11,7 @@ void SightSelectState::onTouch( const Vertex cursorPos, const bool stop ) {
 				clsStatus = SIGHT_RUNNING;
 			}
 		break;
-		case SIGHT_READY:
+		case SIGHT_READY:			
 			clsStatus = SIGHT_IDLE;
 			clsEndPoint = cursorPos;
 			clsSight.findSelectedBoundingBox(clsBeginPoint, clsEndPoint);
@@ -36,8 +36,8 @@ void SightSelectState::renderSelectedObject() {
 	glColor3ub( 255, 255, 0 );
 	selectedObject->drawEdges( maximo );
 	glDisable( GL_LINE_STIPPLE );
-	glLineWidth(1.0f);
-	glFlush();
+	glLineWidth(1.0f);	
+	glFlush();	
 } // end function
 
 // -----------------------------------------------------------------------------
@@ -45,13 +45,13 @@ void SightSelectState::renderSelectedObject() {
 void SightSelectState::deselectObject(){
 	if( previousSelectedObject != NULL ){
 		clsSight.restoreScreen();
-	}//end if
+	}//end if	
 }//end function
 
 // -----------------------------------------------------------------------------
 
 void SightSelectState::onCursorMove( const Vertex cursorPos ) {
-	// cerr<<"cursor move\n\n";
+	cerr<<"cursor move\n\n";
 	switch (clsStatus){
 		case SIGHT_READY :
 			clsEndPoint = cursorPos;
@@ -59,14 +59,14 @@ void SightSelectState::onCursorMove( const Vertex cursorPos ) {
 		break;
 		case SIGHT_IDLE :
 			if ( !clsSight.existsSelection() ){
-				if ( previousSelectedObject != selectedObject){
-					deselectObject();
+				if ( previousSelectedObject != selectedObject){ 	
+					deselectObject();	
 					previousSelectedObject = selectedObject;
 					if( selectedObject != NULL ){
-						renderSelectedObject();
-						//sqrStp = false;
-					}
-				}
+						renderSelectedObject();	
+						//sqrStp = false;			
+					} 
+				}		
 			}
 			selectedObject = clsSight.objectAtPosition( cursorPos );
 		break;
@@ -81,9 +81,9 @@ void SightSelectState::onCursorMove( const Vertex cursorPos ) {
 
 void SightSelectState::render( const bool flush ) {
 	if ( clsStatus == SIGHT_IDLE ) return;
-
+	
 	clsSight.renderBlendingBox(clsBeginPoint, clsEndPoint);
-
+	
 } // end method
 
 // -----------------------------------------------------------------------------
