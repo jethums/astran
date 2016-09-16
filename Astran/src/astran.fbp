@@ -8,7 +8,7 @@
         <property name="disconnect_mode">source_name</property>
         <property name="disconnect_php_events">0</property>
         <property name="disconnect_python_events">0</property>
-        <property name="embedded_files_path">Images</property>
+        <property name="embedded_files_path">../images</property>
         <property name="encoding">UTF-8</property>
         <property name="event_generation">connect</property>
         <property name="file">wxinterface</property>
@@ -228,7 +228,7 @@
                             <property name="permission">none</property>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/load_tec.png</property>
+                            <property name="bitmap">Load From File; ../images/load_tec.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -243,7 +243,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/load_net.png</property>
+                            <property name="bitmap">Load From File; ../images/load_net.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -258,7 +258,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/load_lay.png</property>
+                            <property name="bitmap">Load From File; ../images/load_lay.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -273,7 +273,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/load_pl.png</property>
+                            <property name="bitmap">Load From File; ../images/load_pl.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -343,7 +343,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/save_net.png</property>
+                            <property name="bitmap">Load From File; ../images/save_net.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -358,7 +358,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/save_lay.png</property>
+                            <property name="bitmap">Load From File; ../images/save_lay.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -373,7 +373,7 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="0">
-                            <property name="bitmap">Load From File; ../Images/save_pl.png</property>
+                            <property name="bitmap">Load From File; ../images/save_pl.xpm</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help"></property>
@@ -495,7 +495,7 @@
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/read_script.png</property>
+                        <property name="bitmap">Load From File; ../images/read_script.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -529,7 +529,7 @@
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/close.png</property>
+                        <property name="bitmap">Load From File; ../images/close.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -549,7 +549,7 @@
                     <property name="name">menu_view</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/view_rules.png</property>
+                        <property name="bitmap">Load From File; ../images/view_rules.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -564,7 +564,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/view_cir.png</property>
+                        <property name="bitmap">Load From File; ../images/view_cir.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -579,7 +579,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/view_pref.png</property>
+                        <property name="bitmap">Load From File; ../images/view_pref.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -650,7 +650,7 @@
                     <property name="name">menu_cells</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/view_cellgen.png</property>
+                        <property name="bitmap">Load From File; ../images/view_cellgen.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -875,7 +875,7 @@
                     <property name="name">menu_help</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="0">
-                        <property name="bitmap">Load From File; ../Images/help.png</property>
+                        <property name="bitmap">Load From File; ../images/help.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
@@ -986,7 +986,7 @@
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/read_script.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/read_script.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_readscript</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1010,7 +1010,7 @@
                     <property name="permission">protected</property>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/load_tec.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/load_tec.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_opentech</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1031,7 +1031,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/load_net.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/load_net.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_opennetlist</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1052,7 +1052,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/load_lay.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/load_lay.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_openlibrary</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1073,7 +1073,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/load_pl.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/load_pl.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_openplacement</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1097,7 +1097,7 @@
                     <property name="permission">protected</property>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/save_net.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/save_net.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_savenetlist</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1118,7 +1118,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/save_lay.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/save_lay.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_savelayout</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1139,7 +1139,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/save_pl.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/save_pl.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_savepl</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1163,7 +1163,7 @@
                     <property name="permission">protected</property>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/view_rules.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/view_rules.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_rules</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1184,7 +1184,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/view_cir.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/view_cir.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_circuit</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1205,7 +1205,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/view_cellgen.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/view_cellgen.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_cellgen</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1226,7 +1226,7 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/view_pref.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/view_pref.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_preferences</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1250,7 +1250,7 @@
                     <property name="permission">protected</property>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/refresh.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/refresh.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_refresh</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -1274,7 +1274,7 @@
                     <property name="permission">protected</property>
                 </object>
                 <object class="tool" expanded="0">
-                    <property name="bitmap">Load From File; Images/help.png</property>
+                    <property name="bitmap">Load From Embedded File; ../images/help.xpm</property>
                     <property name="context_menu">0</property>
                     <property name="id">ID_help</property>
                     <property name="kind">wxITEM_NORMAL</property>
@@ -2323,11 +2323,11 @@
                         </object>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">0</property>
                     <property name="flag">wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL</property>
                     <property name="proportion">0</property>
-                    <object class="wxTextCtrl" expanded="1">
+                    <object class="wxTextCtrl" expanded="0">
                         <property name="BottomDockable">1</property>
                         <property name="LeftDockable">1</property>
                         <property name="RightDockable">1</property>
