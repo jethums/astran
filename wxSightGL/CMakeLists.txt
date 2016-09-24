@@ -5,6 +5,19 @@
 cmake_minimum_required(VERSION 2.8)
 project(wxSightGL)
 
+message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
+message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
+message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
+message(STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
+
+# KRITI (CENTOS 5.11) FIXES
+if(${CMAKE_SYSTEM} STREQUAL "Linux-2.6.18-410.el5")
+	message(STATUS "Changing default compiler on CentOS 5.11")
+	set(CMAKE_C_COMPILER   "/opt/rh/devtoolset-2/root/usr/bin/gcc")
+	set(CMAKE_CXX_COMPILER "/opt/rh/devtoolset-2/root/usr/bin/g++")
+	set(CMAKE_AS_COMPILER  "/opt/rh/devtoolset-2/root/usr/bin/as")
+endif()
+
 # set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
@@ -58,6 +71,8 @@ add_executable(wxsightgl WIN32 ${SRCS})
 # We need the Find package for wxWidgets to work
 find_package(wxWidgets COMPONENTS gl core base aui REQUIRED)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated -Wl,-rpath,/usr/lib64/")
+
 if(wxWidgets_FOUND)
 	include(${wxWidgets_USE_FILE})
 	target_link_libraries(wxsightgl ${wxWidgets_LIBRARIES} glut GL GLU GLEW)
@@ -65,5 +80,3 @@ else(wxWidgets_FOUND)
 	message("wxWidgets not found!")
 endif()
 
-# set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated")
-# set(CMAKE_CXX_FLAGS "-std=c++11")
