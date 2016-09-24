@@ -1,35 +1,6 @@
 
 cmake_minimum_required(VERSION 2.8)
-project(astran)
-
-# add_executable(astran
-# src/autocell2.cpp
-# src/cellnetlst.cpp
-# src/cif.cpp
-# src/circuit.cpp
-# src/clayout.cpp
-# src/compaction.cpp
-# src/designmng.cpp
-# src/draw.cpp
-# src/gds.cpp
-# src/graphrouter.cpp
-# src/gridrouter.cpp
-# src/icpdApp.cpp
-# src/icpdfrm.cpp
-# src/lef.cpp
-# src/placer.cpp
-# src/router.cpp
-# src/rules.cpp
-# src/verilog.cpp
-# src/wxabout.cpp
-# src/wxautocell.cpp
-# src/wxcircuit.cpp
-# src/wxfp.cpp
-# src/wxinterface.cpp
-# src/wxpreferences.cpp
-# src/wxrules.cpp)
-
-
+project(Astran)
 
 
 # Set the output folder where your program will be created
@@ -108,9 +79,6 @@ src/wxinterface.cpp
 src/wxpreferences.cpp
 src/wxrules.cpp)
 
-# src/pathfinder.cpp
-# src/pathfinder2.cpp
-# src/spice.cpp
 
 # If we build for windows systems, we also include the resource file
 # containing the manifest, icon and other resources
@@ -130,8 +98,6 @@ add_executable(${PROJECT_NAME} ${SRCS})
 # can add them here as well.
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
 
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated")
+SET(CMAKE_CXX_FLAGS "-std=c++11")
+# SET(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated")
 # cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make all install
-
-
-
