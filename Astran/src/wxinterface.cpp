@@ -465,7 +465,9 @@ ICPD_frm::ICPD_frm( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	bSizer9 = new wxBoxSizer( wxVERTICAL );
 	
 	wx_log = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY );
-	wx_log->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_APPWORKSPACE ) );
+	wx_log->SetFont( wxFont( 10, 75, 90, 90, false, wxEmptyString ) );
+	wx_log->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_3DDKSHADOW ) );
+	wx_log->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_INFOTEXT ) );
 	
 	bSizer9->Add( wx_log, 1, wxALL|wxEXPAND, 5 );
 	
@@ -1459,7 +1461,7 @@ Design_Rules::Design_Rules( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer2;
-	fgSizer2 = new wxFlexGridSizer( 11, 4, 0, 0 );
+	fgSizer2 = new wxFlexGridSizer( 0, 4, 0, 0 );
 	fgSizer2->SetFlexibleDirection( wxBOTH );
 	fgSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	

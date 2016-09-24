@@ -160,7 +160,7 @@ class ICPD_frm : public wxFrame
 	
 	public:
 		
-		ICPD_frm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ASTRAN"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,550 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		ICPD_frm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Astran"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,550 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~ICPD_frm();
 	
