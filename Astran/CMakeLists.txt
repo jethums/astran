@@ -5,6 +5,17 @@
 cmake_minimum_required(VERSION 2.8)
 project(Astran)
 
+
+# KRITI (CENTOS 5.11) FIXES
+#if(cmake_host_system_information(HOSTNAME) MATCHES "kriti")
+#endif()
+
+set(CMAKE_C_COMPILER     "/opt/rh/devtoolset-2/root/usr/bin/gcc")
+set(CMAKE_CXX_COMPILER   "/opt/rh/devtoolset-2/root/usr/bin/g++")
+set(CMAKE_AS_COMPILER    "/opt/rh/devtoolset-2/root/usr/bin/as")
+
+#set(ENV{LD_LIBRARY_PATH} "/usr/lib64/")
+
 set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
@@ -71,9 +82,11 @@ else(wxWidgets_FOUND)
 	message("wxWidgets not found!")
 endif()
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated")
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated -Wl,-rpath,/usr/lib64/")
 
 
+
+link_directories(/usr/local/lib64 /lib64 /usr/lib64/ /usr/local/lib64)
 
 
 
@@ -85,6 +98,8 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated")
 #         RUNTIME DESTINATION bin
 #         LIBRARY DESTINATION lib
 #         ARCHIVE DESTINATION lib/static)
+
+
 
 
 
