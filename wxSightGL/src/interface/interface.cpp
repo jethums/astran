@@ -30,17 +30,21 @@ inline wxImage _wxGetImageFromMemory(const unsigned char *data, int length) {
 } // end method
 
 
-// #if wxCHECK_VERSION(2, 8, 0) && !(WXWIN_COMPATIBILITY_2_6)
+#if wxCHECK_VERSION(2, 8, 0) && !(WXWIN_COMPATIBILITY_2_6)
+#define 	wxUCS(s)   wxU(s).c_str()
+#define 	wxMB(s)   ((const char *)(s).mb_str(wxConvUTF8))
+#define 	Z(s)   wxU(s)
 // #if wxCHECK_VERSION(3, 0, 0) && !(WXWIN_COMPATIBILITY_2_6)
     // Note the following defines need removed
     // when CodeBlocks support for wxWidgets 2.6 is dropped
-    // #define wxOPEN wxFD_OPEN
-    // #define wxFILE_MUST_EXIST wxFD_FILE_MUST_EXIST
-    // #define wxMULTIPLE wxFD_MULTIPLE
-    // #define wxSAVE wxFD_SAVE
-    // #define wxOVERWRITE_PROMPT wxFD_OVERWRITE_PROMPT
-    // #define wxCHANGE_DIR wxFD_CHANGE_DIR
-// #endif
+    #define wxOPEN wxFD_OPEN
+    #define wxFILE_MUST_EXIST wxFD_FILE_MUST_EXIST
+    #define wxMULTIPLE wxFD_MULTIPLE
+    #define wxSAVE wxFD_SAVE
+    #define wxOVERWRITE_PROMPT wxFD_OVERWRITE_PROMPT
+    #define wxCHANGE_DIR wxFD_CHANGE_DIR
+#define 	wxMTX_COMBOBOX_TYPE   wxComboBox
+#endif
 
 
 #include "interface.h"
@@ -49,33 +53,33 @@ SightGL sight;
 
 BEGIN_EVENT_TABLE(wxSightFrame, wxFrame)
 	//EVT_KEY_UP(wxSightFrame::keyPressed)
-		
+
 	EVT_MENU(wxID_EXIT, wxSightFrame::OnQuit)
-	EVT_MENU(wxID_OPEN,wxSightFrame::Open)	
+	EVT_MENU(wxID_OPEN,wxSightFrame::Open)
 	EVT_MENU(wxID_SAVEAS,wxSightFrame::SaveAs)
-	
+
 	EVT_MENU(ID_Reload,wxSightFrame::Reload)
-	
+
 	EVT_MENU(ID_ASK,wxSightFrame::Ask)
-	
+
 	EVT_MENU(ID_SaveSS,wxSightFrame::saveSnapShot)
-	
+
 	EVT_MENU(ID_Cut, wxSightFrame::OnCut)
 	EVT_MENU(ID_Copy, wxSightFrame::OnCopy)
 	EVT_MENU(ID_Paste, wxSightFrame::OnPaste)
 	EVT_MENU(ID_Delete, wxSightFrame::OnDelete)
-	
+
 	EVT_MENU(ID_Group, wxSightFrame::OnGroup)
 	EVT_MENU(ID_Ungroup, wxSightFrame::OnUngroup)
 	EVT_MENU(ID_NW_Model, wxSightFrame::OnModel)
 	EVT_MENU(ID_NW_Component, wxSightFrame::OnComponent)
 	EVT_MENU(ID_Lbl, wxSightFrame::editLabel)
-	
+
 	EVT_MENU(ID_BGCOLOR, wxSightFrame::changeBgColor)
-	EVT_MENU(ID_GCOLOR, wxSightFrame::changeGuideColor)	
+	EVT_MENU(ID_GCOLOR, wxSightFrame::changeGuideColor)
 	EVT_MENU(ID_SLABEL, wxSightFrame::showLabel)
 	EVT_MENU(ID_SLAYER, wxSightFrame::showLayerList)
-	
+
 	EVT_TOOL( SELECTION , wxSightFrame::selection )
 	EVT_TOOL( RECTANGLE, wxSightFrame::rectangle )
 	EVT_TOOL( LINE, wxSightFrame::line )
@@ -83,24 +87,24 @@ BEGIN_EVENT_TABLE(wxSightFrame, wxFrame)
 	EVT_TOOL( RULER, wxSightFrame::ruler )
 	EVT_TOOL( DRAG, wxSightFrame::drag )
 	EVT_TOOL( LABEL, wxSightFrame::insertLabel)
-	
+
 	EVT_TOOL( 100, wxSightFrame::hideTool )
-	
-	EVT_TOOL( ZOOM, wxSightFrame::fitIn )	
+
+	EVT_TOOL( ZOOM, wxSightFrame::fitIn )
 	EVT_TOOL( ZOOMIN, wxSightFrame::zoomIn )
 	EVT_TOOL( ZOOMOUT, wxSightFrame::zoomOut )
-	
+
 	EVT_TOOL( CLEAR_RULERS, wxSightFrame::clearRulers )
-	
+
 	EVT_LAYER_LIST_CHECK(LL, wxSightFrame::OnShowLayer )
-	EVT_LAYER_LIST_SELECTION_CHANGED( wxID_ANY, wxSightFrame::OnChangeSelectedLayer) 
-	
+	EVT_LAYER_LIST_SELECTION_CHANGED( wxID_ANY, wxSightFrame::OnChangeSelectedLayer)
+
 	EVT_COMBOBOX(MDL, wxSightFrame::OnModelChoice)
-	
+
 	EVT_MENU(ID_Save_Model, wxSightFrame::SaveModel)
 	EVT_MENU(ID_Save_Model_As, wxSightFrame::SaveModelAs)
-	
-	
+
+
 
 END_EVENT_TABLE()
 
@@ -148,7 +152,7 @@ wxSightFrame::~wxSightFrame()
 void wxSightFrame::Initialize() {
 	// Create a new wxAuiManager and tell it to manage this window.
 	clsAuiManager = new wxAuiManager( this,wxAUI_MGR_ALLOW_FLOATING | wxAUI_MGR_RECTANGLE_HINT );
-	
+
 	// Crete menubar, toolbar and statusbar.
 	CreateMenubar();
 	CreateToolbar();
@@ -159,7 +163,7 @@ void wxSightFrame::Initialize() {
 	CreateLayerListPane();
 	CreateSightPane();
 	//CreateDebugPane();
-	
+
 	clsModelsCombo = NULL;
 
 	// Define the window min size.
@@ -171,9 +175,9 @@ void wxSightFrame::Initialize() {
 
 // -----------------------------------------------------------------------------
 
-void wxSightFrame::CreateToolbar() {	
+void wxSightFrame::CreateToolbar() {
 	wxString resourcePath = wxStandardPaths::Get().GetResourcesDir() + _T("/"); // [TODO] How do get the correct slash on each plataform?
-	
+
 	wxBitmap bitmaps[] = {
 		wxGetImageFromMemory(select),
 		wxGetImageFromMemory(rectangle),
@@ -185,29 +189,29 @@ void wxSightFrame::CreateToolbar() {
 		wxGetImageFromMemory(zoom),
 		wxGetImageFromMemory(plus),
 		wxGetImageFromMemory(minus)
-	
+
 	};
-	
+
 	const wxSize bitmapSize( 32, 32 );
-		
+
 	// Create tool bar
 	stateToolBar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_FLAT | wxTB_NODIVIDER);
 	stateToolBar->SetToolBitmapSize( bitmapSize );
-					 	
+
 	stateToolBar->AddRadioTool(SELECTION, wxT("Select"   ), bitmaps[ 0 ], bitmaps[ 0 ], _T("Select"   ));
 	stateToolBar->AddRadioTool(RECTANGLE, wxT("Rectangle"), bitmaps[ 1 ], bitmaps[ 1 ], _T("Rectangle"));
 	stateToolBar->AddRadioTool(WIRE     , wxT("Wire"     ), bitmaps[ 2 ], bitmaps[ 2 ], _T("Wire"     ));
 	stateToolBar->AddRadioTool(LINE     , wxT("Line"     ), bitmaps[ 3 ], bitmaps[ 3 ], _T("Line"     ));
-	stateToolBar->AddRadioTool(RULER    , wxT("Ruler"    ), bitmaps[ 4 ], bitmaps[ 4 ], _T("Ruler"    ));		
-	stateToolBar->AddRadioTool(DRAG     , wxT("Drag"     ), bitmaps[ 5 ], bitmaps[ 5 ], _T("Drag"     ));	
-	stateToolBar->AddRadioTool(LABEL    , wxT("Label"    ), bitmaps[ 6 ], bitmaps[ 6 ], _T("Label"    ));	
+	stateToolBar->AddRadioTool(RULER    , wxT("Ruler"    ), bitmaps[ 4 ], bitmaps[ 4 ], _T("Ruler"    ));
+	stateToolBar->AddRadioTool(DRAG     , wxT("Drag"     ), bitmaps[ 5 ], bitmaps[ 5 ], _T("Drag"     ));
+	stateToolBar->AddRadioTool(LABEL    , wxT("Label"    ), bitmaps[ 6 ], bitmaps[ 6 ], _T("Label"    ));
 	stateToolBar->AddSeparator();
 	stateToolBar->AddTool(ZOOM   , wxT("Fit in"  ), bitmaps[ 7 ], wxT("Fit in"  ));
 	stateToolBar->AddTool(ZOOMIN , wxT("Zoom in" ), bitmaps[ 8 ], wxT("Zoom in" ));
 	stateToolBar->AddTool(ZOOMOUT, wxT("Zoom out"), bitmaps[ 9 ], wxT("Zoom out"));
-	stateToolBar->AddSeparator();														
+	stateToolBar->AddSeparator();
 	stateToolBar->Realize();
-	
+
 	clsAuiManager->AddPane(stateToolBar, wxAuiPaneInfo().
 							Name(wxT("ToolBar")).Caption(wxT("ToolBar")).
 							ToolbarPane().Top().
@@ -226,10 +230,10 @@ void wxSightFrame::CreateModelsCombo(){
 	for(int i =0; i <  size; i++){
 		choices[i] = clsModels[i];
 	}
-	
+
 	if(!clsModelsCombo){
 		clsModelsCombo = new wxComboBox(this, MDL, choices[size-1],wxDefaultPosition, wxDefaultSize, size, choices, wxCB_SORT|wxCB_READONLY, wxDefaultValidator);
-		clsAuiManager->AddPane( clsModelsCombo, wxAuiPaneInfo().Top().ToolbarPane().Position(1) );//*/			
+		clsAuiManager->AddPane( clsModelsCombo, wxAuiPaneInfo().Top().ToolbarPane().Position(1) );//*/
 	} else {
 		clsModelsCombo->Clear();
 		for(int i =0; i <  size; i++){
@@ -249,18 +253,18 @@ void wxSightFrame::CreateMenubar(){
 	menuFile->AppendSeparator();
 	menuFile->Append( wxID_NEW, _T("New\tCtrl+N") );
 	menuFile->Append( wxID_OPEN, _T("Open..\tCTRL+O") );
-	menuFile->AppendSeparator();	
+	menuFile->AppendSeparator();
 	menuFile->Append( ID_Reload, _T("Reload..\tCTRL+R") );
 	menuFile->AppendSeparator();
 //	menuFile->Append( ID_Save, _T("&Save") );
 	menuFile->Append( wxID_SAVEAS, _T("Save As..\tCtrl+S") );
 	menuFile->Append( ID_SaveSS, wxT("Save Snapshot\tCtrl+D") );
 	menuFile->AppendSeparator();
-	menuFile->Append( wxID_EXIT, _T("Exit\tCtrl+Q") );    
-	menuBar->Append( menuFile, _T("&File") );    
+	menuFile->Append( wxID_EXIT, _T("Exit\tCtrl+Q") );
+	menuBar->Append( menuFile, _T("&File") );
 
 
-//[TODO]passar dados p/ area de transferencia do SO e habilitar copy/cut/paste 
+//[TODO]passar dados p/ area de transferencia do SO e habilitar copy/cut/paste
 	//menu edit++++++++++++++++++++++++++++++++++
 	wxMenu *menuEdit = new wxMenu;
 	menuEdit->Append(ID_Cut, _T("Cut\tCtrl+X"));
@@ -269,7 +273,7 @@ void wxSightFrame::CreateMenubar(){
 	//menuEdit->AppendSeparator();
 	menuEdit->Append(ID_Paste, _T("Paste\tCtrl+V"));
 	menuEdit->AppendSeparator();
-	menuEdit->Append(ID_Delete, _T("Delete"));	
+	menuEdit->Append(ID_Delete, _T("Delete"));
 	menuBar->Append(menuEdit, _T("&Edit"));
 
 	//menu object+++++++++++++++++++++++++++++++
@@ -279,24 +283,24 @@ void wxSightFrame::CreateMenubar(){
 	menuObject->AppendSeparator();
 	menuObject->Append(ID_NW_Component, _T("New Component\tCtrl+K"));
 	menuObject->AppendSeparator();
-	menuObject->Append(ID_Lbl, _T("Label\tCtrl+L"));	
+	menuObject->Append(ID_Lbl, _T("Label\tCtrl+L"));
 	menuBar->Append(menuObject, _T("&Object"));
-	
+
 	//menu model+++++++++++++++++++++++++++++++
 	wxMenu *menuModel = new wxMenu;
 	menuModel->Append(ID_NW_Model, _T("New Model\tCtrl+M"));
 	menuModel->Append(ID_Save_Model, _T("Save Model"));
 	menuModel->Append(ID_Save_Model_As, _T("Save Model As.."));
 	menuModel->AppendSeparator();
-	menuBar->Append(menuModel, _T("&Model"));	
-	
+	menuBar->Append(menuModel, _T("&Model"));
+
 
 	//menu view+++++++++++++++++++++++++++++++++
 	wxMenu *menuView = new wxMenu;
 	//( menuView->AppendCheckItem(LL, _("Main tool"),_("shows/hide the main tool bar")) )->Check(true);
 	//( menuView->AppendCheckItem(CHECK_LIST_BOX_LAYERS, _("Layers List"),_("shows/hide the list of layers")) )->Check(true);
 	menuView->Append(ID_ASK, _("DoubleBuffer Support.."));
-	menuEdit->AppendSeparator();	
+	menuEdit->AppendSeparator();
 	menuView->Append(ID_BGCOLOR, _("Change Background.."));
 	menuView->Append(ID_GCOLOR, _("Change Guides color.."));
 	menuView->AppendSeparator();
@@ -323,10 +327,10 @@ void wxSightFrame::CreateLayerPane() {
 	checkListBox =  new wxCheckListBox( this, CHECK_LIST_BOX_LAYERS, wxPoint( 0, 0 ), wxSize( 110, 100 ) );
 	const int numLayers = sight.getNumLayers() - 1;
 	for ( int l = 0; l < numLayers; l++ ) {
-		wxString name =  wxString::FromAscii( sight.getLayerName(l).c_str() ); 	
-		checkListBox->Append(name);			
+		wxString name =  wxString::FromAscii( sight.getLayerName(l).c_str() );
+		checkListBox->Append(name);
 		checkListBox->Check(l,true);
-	} // end for	
+	} // end for
 	// Add panes.
 	clsAuiManager->AddPane( checkListBox, wxAuiPaneInfo().Name( wxT( "LayerList") ).Caption( wxT("Layers") ).Left() );
 } // end method
@@ -339,13 +343,13 @@ void wxSightFrame::CreateLayerListPane() {
 	for ( int l = 0; l < numLayers; l++ ) {
 		wxString name =  wxString::FromAscii( sight.getLayerName(l).c_str() );
 		StippleMask msk = sight.getLayerMask(l);
-			unsigned char * mask = (unsigned char *) STIPPLE_MASKS[msk];		
+			unsigned char * mask = (unsigned char *) STIPPLE_MASKS[msk];
 		Color fll = sight.getLayerFillColor(l);
-			wxColor fill = wxColor(fll.r, fll.g, fll.b);		
+			wxColor fill = wxColor(fll.r, fll.g, fll.b);
 		Color ln = sight.getLayerFillColor(l);
-			wxColor line = wxColor(ln.r, ln.g, ln.b);		
+			wxColor line = wxColor(ln.r, ln.g, ln.b);
 		clsLayerList->addItem( new LayerItem( clsLayerList, l, mask, name, fill, line ) );
-	}					
+	}
 	// Add panes.
 	clsAuiManager->AddPane( clsLayerList, wxAuiPaneInfo().Name( wxT( "LayerList") ).Caption( wxT("Layers") ).Left() );
 } // end method
@@ -364,19 +368,27 @@ void wxSightFrame::CreateDebugPane() {
 
 // -----------------------------------------------------------------------------
 
-void wxSightFrame::CreateSightPane() {
+void wxSightFrame::CreateSightPane()
+{
 #ifndef __linux__
-        int args[] = {WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, WX_GL_LEVEL, 1, 0};
-#else                
-        int args[] = {WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, 0};
+	int args[] = {WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, WX_GL_LEVEL, 1, 0};
+#else
+	int args[] = {WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, 0};
 #endif
-	basic = new BasicGLPane( this, args );		
-	// Add panes.
-	clsAuiManager->AddPane( basic, wxAuiPaneInfo().Name( wxT( "Sight") ).CenterPane() );
 
-	
+	basic = new BasicGLPane( this, args );
+	basic->Show();
+
+	// Add panes
+	clsAuiManager->AddPane( basic, wxAuiPaneInfo().Name( wxT("Sight") ).CenterPane() );
+	clsAuiManager->Update();
+
+	if (!basic->IsShown()) {
+		basic->Show(true);
+	}
+
 	basic->SetCurrent();
-} // end method
+}
 
 // -----------------------------------------------------------------------------
 
@@ -386,8 +398,8 @@ void wxSightFrame::CreateModelList() {
 	for ( int l = 0; l < numModels; l++ ) {
 		wxString name =  wxString::FromAscii( sight.getModelName(l).c_str() );
 		clsModels.push_back(name);
-	}			
-	CreateModelsCombo();		
+	}
+	CreateModelsCombo();
 } // end method
 
 
@@ -396,25 +408,25 @@ void wxSightFrame::CreateModelList() {
 void wxSightFrame::saveSnapShot(wxCommandEvent& event){
 	wxString filename = wxFileSelector(_("File name"), _(""), _(""), _(""),
 			_("PNG files (*.png)|*.png"), wxSAVE);
-	
+
 	const int w = sight.getWidth()   ;  // {TODO} verificar bug maior 660width
-	const int h = sight.getHeight()   ; 
-	
+	const int h = sight.getHeight()   ;
+
 	Color * source = ( Color * ) sight.getPixels();
 	Color * target = ( Color * ) malloc( w * h * sizeof( Color ) );
-	
+
 	for( int i = 0; i < h ; i++ ){
 			for( int j = 0; j < w; j++){
 				target[( (( h - 1  ) - i)*w + j ) ] = source[ ( (i * w) + j ) ];
 			}//end for row
-	}//end for line	
+	}//end for line
 
 	wxImage image;
 	image.SetOption(_("wxIMAGE_OPTION_PNG_FORMAT"),_("wxPNG_TYPE_COLOUR"));
 	image.Create(w, h);
 	image.SetData( (unsigned char*) target);
 	image.SaveFile(filename + _(".png"), wxBITMAP_TYPE_PNG);
-		
+
 	delete [] source;
 	delete [] target;
 } // end method
@@ -436,14 +448,14 @@ void wxSightFrame::changeGuideColor(wxCommandEvent& event){
 
 void wxSightFrame::showLabel(wxCommandEvent& event){
 	const int lbl = sight.getNumLayers()-1;
-	sight.setLayerVisibility( lbl, event.IsChecked( ) );	
+	sight.setLayerVisibility( lbl, event.IsChecked( ) );
 	sight.render();
 }
 // -----------------------------------------------------------------------------
 
 void wxSightFrame::showLayerList(wxCommandEvent& event){
 	clsAuiManager->RestorePane( wxAuiPaneInfo().Name( wxT( "LayerList") ).Caption( wxT("Layers") ).Left() );
-	
+
 	clsAuiManager->Update(); //*/
 }
 
@@ -465,7 +477,7 @@ void wxSightFrame::OnChangeSelectedLayer( wxLayerListEvent &event ) {
 void wxSightFrame::OnShowLayer( wxLayerListEvent &event ) {
 	int layer = event.GetInt();
 	wxCheckBox *check = ( wxCheckBox * ) event.GetEventObject();
-	sight.setLayerVisibility( layer, check->IsChecked( ) );	
+	sight.setLayerVisibility( layer, check->IsChecked( ) );
 	sight.render();
 }
 // -----------------------------------------------------------------------------
@@ -505,7 +517,7 @@ void wxSightFrame::drag(wxCommandEvent& event){
 // -----------------------------------------------------------------------------
 void wxSightFrame::insertLabel(wxCommandEvent& event){
 	sight.setState( SIGHT_LABEL );
-	SetStatusText( _("Label") );	
+	SetStatusText( _("Label") );
 }
 // -----------------------------------------------------------------------------
 void wxSightFrame::editLabel(wxCommandEvent& WXUNUSED(event)){
@@ -569,12 +581,12 @@ void wxSightFrame::Open(wxCommandEvent& event){
 			cerr<<"OPEN GDS2\n";
 		}
 		setCompletTitle(filename);
-		sight.render();		
+		sight.render();
 		CreateModelList();
 	}//else: cancelled by user
-	
-	
-		
+
+
+
 }//end event
 // -----------------------------------------------------------------------------
 void wxSightFrame::SaveAs(wxCommandEvent& event){
@@ -582,7 +594,7 @@ void wxSightFrame::SaveAs(wxCommandEvent& event){
 	if( !filename.empty() ){
 		sight.saveFile( filename.ToAscii() );
 	}
-		
+
 }//end event
 // -----------------------------------------------------------------------------
 /*void wxSightFrame::enableTool(wxCommandEvent& event){
@@ -594,8 +606,8 @@ void wxSightFrame::SaveAs(wxCommandEvent& event){
 // -----------------------------------------------------------------------------
 void wxSightFrame::enableList(wxCommandEvent& event){
 	checkListBox->Show(event.IsChecked());
-	
-	if( event.IsChecked()){	
+
+	if( event.IsChecked()){
 		splitter->SplitVertically( checkListBox, basic, 10 );
 	}else{
 		splitter->Unsplit(checkListBox);
@@ -615,8 +627,8 @@ void wxSightFrame::zoomOut(wxCommandEvent& event){
 	sight.zoom(false);//false=zoomOut
 }//end event
 // -----------------------------------------------------------------------------
-void wxSightFrame::fitIn(wxCommandEvent& event){	
-	sight.fitIn();		
+void wxSightFrame::fitIn(wxCommandEvent& event){
+	sight.fitIn();
 }//end event
 
 
@@ -636,10 +648,10 @@ void wxSightFrame::hideTool(wxCommandEvent& event){
 void wxSightFrame::setCompletTitle(wxString filename){
 	/*
 	wxString title = _("");
-	size_t size = filename.Len()-1; 
+	size_t size = filename.Len()-1;
 	for( size_t i = size; i >=0; i--){
-		if( filename[i] == '/' ) { 
-			break; 
+		if( filename[i] == '/' ) {
+			break;
 		} else {
 			title = filename[i] + title;
 		}//end else
@@ -658,12 +670,12 @@ void wxSightFrame::setCompletTitle(wxString filename){
 void wxSightFrame::openFile( const char * const filename ) {
 		sight.loadCIF( filename );
 		setCompletTitle( wxString::FromAscii(filename) );
-		sight.render();	
+		sight.render();
 		CreateModelList();
 		clsFilename = wxString::FromAscii(filename);
 /*
-	sight.loadCIF( filename );	
-	sight.render();	 //*/	 
+	sight.loadCIF( filename );
+	sight.render();	 //*/
 } // end method
 // -----------------------------------------------------------------------------
 
@@ -671,7 +683,7 @@ void wxSightFrame::OnModelChoice(wxCommandEvent& event){
 	if( !sight.dirtyModel() ){//if no changes
 		sight.setCurrentModel( string(event.GetString().mb_str()) );
 	} else {//save?
-		int what = wxMessageBox(_(""), _("Save Changes?"), wxYES_NO, this);	
+		int what = wxMessageBox(_(""), _("Save Changes?"), wxYES_NO, this);
 		if(what == wxYES){
 			sight.saveModel();
 		}
@@ -703,7 +715,7 @@ void wxSightFrame::OnModel(wxCommandEvent& WXUNUSED(event)){
 			sight.setCurrentModel( lbl );
 		}//end iff
 	}//end if
-	
+
 }
 
 // -----------------------------------------------------------------------------
@@ -716,7 +728,7 @@ void wxSightFrame::SaveModel(wxCommandEvent& WXUNUSED(event)){
 // -----------------------------------------------------------------------------
 
 void wxSightFrame::Reload(wxCommandEvent& WXUNUSED(event)){
-	
+
 	if ( !clsFilename.empty() ){
 		if(clsFilename.Contains(_(".cif"))){
 			cerr<<"OPEN CIF\n";
@@ -725,10 +737,10 @@ void wxSightFrame::Reload(wxCommandEvent& WXUNUSED(event)){
 			sight.loadGDSII( clsFilename.ToAscii());
 			cerr<<"OPEN GDS2\n";
 		}
-		sight.render();		
+		sight.render();
 		CreateModelList();
-	}//else: cancelled by user	
-	
+	}//else: cancelled by user
+
 }
 
 // -----------------------------------------------------------------------------
@@ -747,12 +759,12 @@ void wxSightFrame::SaveModelAs(wxCommandEvent& WXUNUSED(event)){
 
 void wxSightFrame::Ask(wxCommandEvent& WXUNUSED(event)){
 	GLboolean params[1];
-	
+
 	glGetBooleanv( GL_DOUBLEBUFFER, params);
-	
+
 	if(params[0])     wxMessageBox(_T("DoubleBuffer Supported"), _T("Yupeee \\o/"), wxOK | wxICON_INFORMATION, this);
 	else			wxMessageBox(_T("DoubleBuffer Not Supported"), _T("HELL"), wxOK | wxICON_INFORMATION, this);
-	
+
 }//end method
 
 

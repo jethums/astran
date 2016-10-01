@@ -4,7 +4,7 @@ BEGIN_EVENT_TABLE(BasicGLPane, wxGLCanvas)
 	EVT_LEFT_DCLICK(BasicGLPane::doubleLClick)
 	EVT_MOTION(BasicGLPane::mouseMoved)
 	EVT_LEFT_DOWN(BasicGLPane::mouseDown)
-	EVT_LEFT_UP(BasicGLPane::mouseReleased)		
+	EVT_LEFT_UP(BasicGLPane::mouseReleased)
 	EVT_RIGHT_DOWN(BasicGLPane::rightClick)
 	EVT_RIGHT_UP(BasicGLPane::rightClick)
 	EVT_LEAVE_WINDOW(BasicGLPane::mouseLeftWindow)
@@ -16,40 +16,53 @@ BEGIN_EVENT_TABLE(BasicGLPane, wxGLCanvas)
 	EVT_MIDDLE_DOWN(BasicGLPane::middleDown)
 	EVT_MIDDLE_UP(BasicGLPane::middleUp)
 	EVT_PAINT( BasicGLPane::OnPaint )
-	
+
 	EVT_MENU(popCONNECTlayer,  BasicGLPane::connect)
 	EVT_MENU(popCONNECTlayerUP,  BasicGLPane::connect)
 	EVT_MENU(popCONNECTlayerDOWN,  BasicGLPane::connect)
 	EVT_MENU(popCONNECTlayerUD,  BasicGLPane::connect)
-	
+
 	EVT_MENU(popMIRRORx, BasicGLPane::MirrorX)
 	EVT_MENU(popMIRRORy, BasicGLPane::MirrorY)
 END_EVENT_TABLE()
 
-// ----------------------------------------------------------------------------- 
- 
+// -----------------------------------------------------------------------------
+
 void wxGLCanvasSwapBuffers( void * data ) {
 	cerr << "Swapping buffers...\n";
 	( ( BasicGLPane * ) data)->SwapBuffers();
 } // end function
 
-// ----------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
 
-BasicGLPane::BasicGLPane(wxWindow* parent, int* args) :
-	wxGLCanvas(parent, wxID_ANY,  wxDefaultPosition,  wxDefaultSize, 0, wxT("GLCanvas"),  args)
+// GLCanvas::GLCanvas(wxFrame* parent, const wxSize& size , int* args)
+        // : wxGLCanvas(parent, wxID_ANY, args, wxDefaultPosition, size, 0, wxT("GLCanvas"), wxNullPalette)
+// {
+    // glContext = new wxGLContext(this, NULL);
+    // SetCurrent(*glContext);
+// }
+
+BasicGLPane::BasicGLPane(wxWindow* parent, int* args)
+	: wxGLCanvas(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas"), args)
 {
 	doubleFlag = false;
 	SetMinSize(wxSize(300,300));
-		
+
 	sight.setup();
 	sight.setSwapBuffersFunction( wxGLCanvasSwapBuffers );
 	sight.setSwapBuffersFunctionData( this );
-	
-	createPopUp();
-	
-} // end method
 
-// ----------------------------------------------------------------------------- 
+	if (!this->IsShown()) {
+		this->Show(true);
+	}
+
+	wxPaintDC dc(this);
+	this->SwapBuffers();
+
+	createPopUp();
+}
+
+// -----------------------------------------------------------------------------
 
 void BasicGLPane::createSubMenuConnect(){
 	clsConnect = new wxMenu(wxEmptyString, 0);
@@ -59,28 +72,30 @@ void BasicGLPane::createSubMenuConnect(){
 	clsConnect->Append(popCONNECTlayerUD, _("This, Up & Down"), wxEmptyString );
 }
 
-// ----------------------------------------------------------------------------- 
-void BasicGLPane::createPopUp(){
+// -----------------------------------------------------------------------------
+void BasicGLPane::createPopUp()
+{
 	clsPopUp = new wxMenu(wxT("SightGL"), 0);
-	//clsPopUp->Append(popCONNECTION, _("Connection"), _("encontra conex�es"));
+	// clsPopUp->Append(popCONNECTION, _("Connection"), _("encontra conexes"));
+
 	createSubMenuConnect();
 	clsPopUp->AppendSubMenu(clsConnect, _("Connection"));
 	clsPopUp->AppendSeparator( );
+
 	clsPopUp->Append(popMIRRORx, _("Mirror X"), _("espelhamento em x"));
 	clsPopUp->Append(popMIRRORy, _("Mirror Y"), _("espelhamento em y"));
-	
 }
 
-// ----------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
 //+++MOUSE
 // -----------------------------------------------------------------------------
-void BasicGLPane::mouseMoved(wxMouseEvent& event) { 
+void BasicGLPane::mouseMoved(wxMouseEvent& event) {
 	if(event.MiddleIsDown() ){
 		cout<<"midddle button event\n";
 	}
 /*
 	if( event.Moving() ){
-		sight.movePassiveCursor( event.GetX(), event.GetY() ); 
+		sight.movePassiveCursor( event.GetX(), event.GetY() );
 	} else {
 		sight.moveMotionCursor( event.GetX(), event.GetY() );
 	}
@@ -94,16 +109,16 @@ void BasicGLPane::mouseLeftWindow(wxMouseEvent& event) {}
 // -----------------------------------------------------------------------------
 void BasicGLPane::mouseDown(wxMouseEvent& event) {
 	sight.touch();
-	SetFocus();	
+	SetFocus();
 }//end event
 // -----------------------------------------------------------------------------
-void BasicGLPane::mouseReleased(wxMouseEvent& event) { 
+void BasicGLPane::mouseReleased(wxMouseEvent& event) {
 	if( sight.getCurrentStateName() == SIGHT_SELECT ) sight.touch();
-	
+
 	if( sight.getCurrentStateName() == SIGHT_RECTANGLE )
 		if(sight.getCurrentStateStatus() == SIGHT_READY )
 			sight.touch();
-	 
+
 }//end event
 // -----------------------------------------------------------------------------
 void BasicGLPane::doubleLClick(wxMouseEvent& event){
@@ -118,30 +133,30 @@ void BasicGLPane::rightClick(wxMouseEvent& event) {
 	if( event.RightDown() ){
 		sight.beginZooming();
 	} else {
-		if( !sight.touch() ){		
+		if( !sight.touch() ){
 			PopupMenu(clsPopUp, event.GetPosition());
 		}
-		sight.end();	
+		sight.end();
 	}//end else
 }//end method
 
 // -----------------------------------------------------------------------------
 //+++SCROLL
 // -----------------------------------------------------------------------------
-void BasicGLPane::mouseWheelMoved(wxMouseEvent& event) { 
+void BasicGLPane::mouseWheelMoved(wxMouseEvent& event) {
 	sight.zoom(event.GetWheelRotation() > 0); //>0 = wheel rotation up
 }//end event
 // -----------------------------------------------------------------------------
 void BasicGLPane::middleDown(wxMouseEvent& event){
 	sight.beginDrag();
  }//end event
-// ----------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
   void BasicGLPane::middleUp(wxMouseEvent& event){
 	sight.touch();
 	sight.end();
  }//end event
- 
-// ----------------------------------------------------------------------------- 
+
+// -----------------------------------------------------------------------------
 //+++KEYBOARD
 // -----------------------------------------------------------------------------
 void BasicGLPane::keyPressed(wxKeyEvent& event) {
@@ -152,7 +167,7 @@ void BasicGLPane::keyPressed(wxKeyEvent& event) {
 				sight.setState( SIGHT_SELECT );
 			else
 				sight.resetState();
-			break;		
+			break;
 		case WXK_RETURN:
 			sight.touch( true );
 			break;
@@ -184,33 +199,33 @@ void BasicGLPane::keyPressed(wxKeyEvent& event) {
 		break;
 		case WXK_LEFT:
 			sight.toLeft();
-		break;		
+		break;
 		case WXK_RIGHT:
 			sight.toRight();
 		break;
-		
+
 		case WXK_PAGEDOWN:
 			sight.hierarchy(true);//bool down?
-		break;		
+		break;
 		case WXK_PAGEUP:
 			sight.hierarchy(false);//bool down?
-		break;		
-			
+		break;
+
 		// BEGIN COMPABILITY
 		default:
-			sight.handleKeyEvent( event.GetKeyCode() ,event.m_controlDown );	
-			break;	
+			sight.handleKeyEvent( event.GetKeyCode() ,event.m_controlDown );
+			break;
 		// END
 	} // end switch
-	
+
 }//end event
 // -----------------------------------------------------------------------------
 void BasicGLPane::keyReleased(wxKeyEvent& event) {}
-// ----------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
 
 
 //+++OTHER
-// ----------------------------------------------------------------------------- 
+// -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 void BasicGLPane::resized(wxSizeEvent& evt) {
@@ -218,8 +233,12 @@ void BasicGLPane::resized(wxSizeEvent& evt) {
 	sight.reshapeWindow( getWidth(), getHeight() );
     //Update(); // Refresh(); isn't enough. If you need to update the window immediately you should use Update instead of Refresh().
 }
-// ----------------------------------------------------------------------------- 
-void BasicGLPane::render() {
+// -----------------------------------------------------------------------------
+
+
+void BasicGLPane::render()
+{
+    if(!IsShown()) return;
 }
 
 // -----------------------------------------------------------------------------
