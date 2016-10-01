@@ -56,9 +56,8 @@ BasicGLPane::BasicGLPane(wxWindow* parent, int* args)
 		this->Show(true);
 	}
 
-	wxPaintDC dc(this);
 	this->SwapBuffers();
-
+	wxPaintDC dc(this);
 	createPopUp();
 }
 

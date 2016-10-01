@@ -44,16 +44,16 @@ enum SightCursorDirection { SIGHT_FREE, SIGHT_DIAGONAL, SIGHT_ORTHOGONAL };
 class SightGL {
 	private:
 
-		Vertex cameraMin;	
+		Vertex cameraMin;
 		Vertex cameraMax;
 // -----------------------------------------------------------------------------
 		// Window Dimensions
 		int clsWindowWidth;
 		int clsWindowHeight;
-// -----------------------------------------------------------------------------	
+// -----------------------------------------------------------------------------
 		// Cursor position is in discretised space coordinate system.
-		Vertex clsPreviousCursorPos, clsCursorPos;		
-		Vertex clsPrevTouch;		
+		Vertex clsPreviousCursorPos, clsCursorPos;
+		Vertex clsPrevTouch;
 		SightExcept clsException;
 		SightStateName clsCurrentStateName;
 		vector< SightState * > clsStates;
@@ -70,9 +70,9 @@ class SightGL {
 
 		void (*clsSwapBuffersFunction)( void *data );
 		void *clsSwapBuffersFunctionData;
-		
+
 	protected:
-	
+
 // -----------------------------------------------------------------------------
 		void window_pos( GLfloat x, GLfloat y, GLfloat z, GLfloat w );
 		void copyPixels( GLint x, GLint y, GLint width, GLint height, GLenum sourceBuffer, GLenum targetBuffer );
@@ -95,17 +95,17 @@ class SightGL {
 		Ruler * previousRuler;
 		int   clsCurrentLayer;
 // -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------	
-	
-	
+// -----------------------------------------------------------------------------
+
+
 	public:
-	
+
 		void setSwapBuffersFunction( void (*f)(void *data) ) { clsSwapBuffersFunction = f; }
 		void setSwapBuffersFunctionData( void *data ) { clsSwapBuffersFunctionData = data; }
 
 
 
-// -----------------------------------------------------------------------------		
+// -----------------------------------------------------------------------------
 		void setup();
 		void restartAll();
 		void handleReshape( int width, int height );
@@ -118,7 +118,7 @@ class SightGL {
 		void loadEDFII( const char * const filename );
 		void loadGDSII( const char* const filename );
 		void saveFile( const char * const filename);
-// -----------------------------------------------------------------------------		
+// -----------------------------------------------------------------------------
 	//others
 		int getScale() const { return scale; }
 		int getZ() const { return maximo; }
@@ -129,16 +129,16 @@ class SightGL {
 		void mouseMove( const float x, const float y);
 		void addObject( Object * newObj);
 		void addLabel( Object * newObj);
-		
+
 		void drawCurrentLayer();
 		void addRuler(Ruler ruler);
 		bool findSelectedBoundingBox(Vertex min, Vertex max);
-		void drawSelectedBoundingBox(const int maximo);	
+		void drawSelectedBoundingBox(const int maximo);
 		Object * objectAtPosition( Vertex pos );
 		Ruler * rulerAtPosition(Vertex pos);
-		bool existsSelection();		
-		
-		void drawLabelLayer();		
+		bool existsSelection();
+
+		void drawLabelLayer();
 		void setLabel(string label);
 		string getCurrentLabel();
 // -----------------------------------------------------------------------------
@@ -146,16 +146,16 @@ class SightGL {
 		void moveSelection(Vertex click);
 		void moveObjects(Vertex click);
 		void move();
-// -----------------------------------------------------------------------------		
-		void handleKeyEvent(unsigned char key, bool ctrl);	
+// -----------------------------------------------------------------------------
+		void handleKeyEvent(unsigned char key, bool ctrl);
 // -----------------------------------------------------------------------------
 	//layers methods
 		string getLayerName( const int index ) ;
-		void setLayerVisibility( const int layer, const bool visible );		
+		void setLayerVisibility( const int layer, const bool visible );
 		int getNumLayers() { return repository.getNumLayers(); }
-		int getCurrentLayer() const { return clsCurrentLayer; }				
-		void setCurrentLayer( const int layer ) { clsCurrentLayer = layer; }	
-		StippleMask getLayerMask( const int index )  ;	
+		int getCurrentLayer() const { return clsCurrentLayer; }
+		void setCurrentLayer( const int layer ) { clsCurrentLayer = layer; }
+		StippleMask getLayerMask( const int index )  ;
 		Color getLayerFillColor(const int index);
 		Color getLayerLineColor(const int index);
 // -----------------------------------------------------------------------------
@@ -176,17 +176,17 @@ class SightGL {
 // -----------------------------------------------------------------------------
 	//visualization methods
 		void renderBlendingBox(Vertex first, Vertex last);
-		
+
 		void zoom(const bool up);
-		void fitIn( );	
+		void fitIn( );
 		bool zoomIn();
-		
+
 		float getZoom(){ return camera.getZoom(); }
-		
+
 		void beginZooming(){ clsException = SIGHT_ZOOM; clsPrevTouch = clsCursorPos; }
 		void beginDrag()   { clsException = SIGHT_MOVE; clsPrevTouch = clsCursorPos; }
 		void end(){ clsException = SIGHT_NONE; }
-		
+
 		void connection(const int ID);
 // -----------------------------------------------------------------------------
 		unsigned char* getPixels() const;
@@ -199,21 +199,21 @@ class SightGL {
 		void toDown();
 		void toLeft();
 		void toRight();
-		
+
 // -----------------------------------------------------------------------------
 	//hierarchy
 		void hierarchy(bool down);
-		
+
 		int getNumModels();
 		string getModelName(int i);
 		void setCurrentModel(string name);
-		
+
 		bool createNewComponent(const char* name);
 		void createComponent();
 		bool createNewModel(const char* name);
 		void saveModel();
 		void saveModelAs(const char* name);
-		
+
 		bool dirtyModel(){return repository.dirty();}
 // -----------------------------------------------------------------------------
 
@@ -230,7 +230,7 @@ class SightGL {
 
 		// Touches.
 		bool touch( const bool stop = false );
-		
+
 		// Cursor.
 		void moveCursor( const int xScreen, const int yScreen );
 		void displaceCursor( const int dxScreen, const int dyScreen );
@@ -246,7 +246,7 @@ class SightGL {
 		void saveScreen();
 		void restoreScreen( const int xSpace, const int ySpace, const int wSpace, const int hSpace );
 		void saveScreen( const int xSpace, const int ySpace, const int wSpace, const int hSpace );
-		
+
 }; // end class
 
 // -----------------------------------------------------------------------------

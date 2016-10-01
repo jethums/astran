@@ -3,11 +3,11 @@
 
 // include OpenGL
 #ifdef __WXMAC__
-#include <OpenGL/glu.h>
-#include <OpenGL/gl.h>
-#include <GLUT/glut.h>
+	#include <OpenGL/glu.h>
+	#include <OpenGL/gl.h>
+	#include <GLUT/glut.h>
 #else
-#include "./sight/opengl.h"
+	#include "./sight/opengl.h"
 #endif
 
 #include <wx/wx.h>

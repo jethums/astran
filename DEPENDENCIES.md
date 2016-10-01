@@ -1,4 +1,8 @@
 
+sudo apt-get install build-essential libgl1-mesa-dev  # Debian, Ubuntu
+sudo apt-get install libglew-dev libsdl2-dev libsdl2-image-dev libglm-dev libfreetype6-dev  # Debian, Ubuntu
+glxinfo | grep OpenGL
+
 # Para compilar..
 # Dependencies: Ubuntu 14.xx/16.xx
 sudo apt install libglew1.13 libglew-dev
