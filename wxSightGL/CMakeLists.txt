@@ -2,20 +2,26 @@
 # USAGE:
 # cmake . && make DESTDIR=./ all install
 
+
+# sudo apt-get install mesa-utils
+# glxinfo | grep "OpenGL version"
+# OpenGL version string: 3.0 Mesa 11.2.2
+
 cmake_minimum_required(VERSION 2.8)
 project(wxSightGL)
 
-message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
-message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
-message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
-message(STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
+#message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
+#message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
+##message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
+#message(STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
 
 # KRITI (CENTOS 5.11) FIXES
 if(${CMAKE_SYSTEM} STREQUAL "Linux-2.6.18-410.el5")
-	message(STATUS "Changing default compiler on CentOS 5.11")
-	set(CMAKE_C_COMPILER   "/opt/rh/devtoolset-2/root/usr/bin/gcc")
-	set(CMAKE_CXX_COMPILER "/opt/rh/devtoolset-2/root/usr/bin/g++")
-	set(CMAKE_AS_COMPILER  "/opt/rh/devtoolset-2/root/usr/bin/as")
+	set(GCC_PATH  "/opt/rh/devtoolset-2/root/usr/bin")
+	message(STATUS "Changing default compiler on CentOS 5.11 to (${GCC_PATH})")
+	set(CMAKE_C_COMPILER   "${GCC_PATH}/gcc")
+	set(CMAKE_CXX_COMPILER "${GCC_PATH}/g++")
+	set(CMAKE_AS_COMPILER  "${GCC_PATH}/as")
 endif()
 
 # set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
