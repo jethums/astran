@@ -15,6 +15,5 @@ make
 
 ## Screenshots
 
-![Astran](Astran/doc/astran.png)
-![SightGL](SightGL/doc/sightgl.png)
-
+ <img src="Astran/doc/astran.png" alt="Astran" width="600px">
+ <img src="SightGL/doc/sightgl.png" alt="SightGL" width="600px">
