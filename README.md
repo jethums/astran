@@ -16,5 +16,5 @@ make
 ## Screenshots
 
 ![Astran](Astran/doc/astran.png)
-![SightGL](astran/SightGL/doc/sightgl.png)
+![SightGL](SightGL/doc/sightgl.png)
 
