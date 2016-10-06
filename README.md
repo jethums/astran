@@ -1,7 +1,7 @@
 
 # ASTRAN
 
-This is a simple fork of the main Astran project. The original repo is https://github.com/aziesemer/astran. For more information go to the main project.
+This is a simple fork of the main Astran project. The original repo is https://github.com/aziesemer/astran. For more information go to the main project, thank you.
 
 ## Building this fork
 
@@ -16,5 +16,5 @@ make
 ## Screenshots
 
 ![Astran](Astran/doc/astran.png)
-![SightGL](https://github.com/aziesemer/astran/blob/master/SightGL/doc/sightgl.png?raw=true)
+![SightGL](astran/SightGL/doc/sightgl.png)
 
