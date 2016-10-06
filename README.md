@@ -15,6 +15,6 @@ make
 
 ## Screenshots
 
-![Astran](https://github.com/aziesemer/astran/blob/master/Astran/doc/astran.png?raw=true)
+![Astran](Astran/doc/astran.png)
 ![SightGL](https://github.com/aziesemer/astran/blob/master/SightGL/doc/sightgl.png?raw=true)
 
