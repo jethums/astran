@@ -4,17 +4,21 @@
 cmake_minimum_required(VERSION 2.8)
 project(Astran)
 
-message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
-message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
-message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
-message(STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
+# Binary name
+set(BIN Astran)
+
+# message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
+# message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
+# message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
+# message(STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR})
 
 # KRITI (CENTOS 5.11) FIXES
 if(${CMAKE_SYSTEM} STREQUAL "Linux-2.6.18-410.el5")
-	message(STATUS "Chaning default compiler on CentOS 5.11")
-	set(CMAKE_C_COMPILER   "/opt/rh/devtoolset-2/root/usr/bin/gcc")
-	set(CMAKE_CXX_COMPILER "/opt/rh/devtoolset-2/root/usr/bin/g++")
-	set(CMAKE_AS_COMPILER  "/opt/rh/devtoolset-2/root/usr/bin/as")
+	set(GCC_PATH  "/opt/rh/devtoolset-2/root/usr/bin")
+	message(STATUS "Changing default compiler on CentOS 5.11 to (${GCC_PATH})")
+	set(CMAKE_C_COMPILER   "${GCC_PATH}/gcc")
+	set(CMAKE_CXX_COMPILER "${GCC_PATH}/g++")
+	set(CMAKE_AS_COMPILER  "${GCC_PATH}/as")
 endif()
 
 #set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
@@ -64,7 +68,7 @@ endif(WIN32)
 
 # Here we define the executable minimal.exe or minimal on other systems
 # the above paths and defines will be used in this build
-add_executable(astran WIN32 ${ASTRAN_SRCS})
+add_executable(${BIN} WIN32 ${ASTRAN_SRCS})
 
 # You can figure out what libraries you need here
 find_package(wxWidgets COMPONENTS gl core base REQUIRED)
@@ -73,10 +77,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated -Wl,-rpath,/usr/lib64/")
 
 if(wxWidgets_FOUND)
 	include(${wxWidgets_USE_FILE})
-	target_link_libraries(astran ${wxWidgets_LIBRARIES})
+	target_link_libraries(${BIN} ${wxWidgets_LIBRARIES})
 else(wxWidgets_FOUND)
 	message("wxWidgets not found!")
 endif()
-
-
-

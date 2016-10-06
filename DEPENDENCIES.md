@@ -1,4 +1,8 @@
 
+# sudo apt-get install mesa-utils
+# glxinfo | grep "OpenGL version"
+# OpenGL version string: 3.0 Mesa 11.2.2
+
 sudo apt-get install build-essential libgl1-mesa-dev  # Debian, Ubuntu
 sudo apt-get install libglew-dev libsdl2-dev libsdl2-image-dev libglm-dev libfreetype6-dev  # Debian, Ubuntu
 glxinfo | grep OpenGL

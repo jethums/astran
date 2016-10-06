@@ -2,15 +2,10 @@
 # USAGE:
 # cmake . && make DESTDIR=./ all install
 
-
-# sudo apt-get install mesa-utils
-# glxinfo | grep "OpenGL version"
-# OpenGL version string: 3.0 Mesa 11.2.2
-
 cmake_minimum_required(VERSION 2.8)
 project(wxSightGL)
 
-# Binnary name
+# Binary name
 set(BIN SigthGL)
 
 #message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
