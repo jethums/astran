@@ -1,6 +1,7 @@
+#!/bin/bash
+# Simple script to set tools
 
+export PATH=$(pwd)/build/astran:$PATH
+export PATH=$(pwd)/build/sightgl:$PATH
 
-export PATH=$(pwd)/Astran/build/bin:$PATH
-export PATH=$(pwd)/wxSightGL/build/bin:$PATH
-
-export ASTRAN_PATH=$(pwd)
+export ASTRAN_PATH=$(pwd)/build/
