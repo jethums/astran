@@ -42,10 +42,18 @@ void wxGLCanvasSwapBuffers( void * data ) {
     // SetCurrent(*glContext);
 // }
 
+
+// static void fatalError(const char *why)
+// {
+//     fprintf(stderr, "%s", why);
+//     exit(0x666);
+// }
+
 BasicGLPane::BasicGLPane(wxWindow* parent, int* args)
-	: wxGLCanvas(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas"), args)
+	: wxGLCanvas(parent, (wxGLCanvas*) NULL, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE , wxT("GLCanvas"), args)
+	// : wxGLCanvas(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas"), args)
 {
-	doubleFlag = false;
+	// doubleFlag = false;
 	SetMinSize(wxSize(300,300));
 
 	sight.setup();
@@ -56,8 +64,10 @@ BasicGLPane::BasicGLPane(wxWindow* parent, int* args)
 		this->Show(true);
 	}
 
+	// this->SetCurrent();
+
+	// Isso faz funcionar, mas da um assertion
 	this->SwapBuffers();
-	wxPaintDC dc(this);
 	createPopUp();
 }
 
@@ -238,14 +248,21 @@ void BasicGLPane::resized(wxSizeEvent& evt) {
 void BasicGLPane::render()
 {
     if(!IsShown()) return;
+
+	SetCurrent();
+
+	glFlush();
+    SwapBuffers();
 }
 
 // -----------------------------------------------------------------------------
 
 void BasicGLPane::OnPaint( wxPaintEvent &event ) {
 	wxPaintDC dc( this );
-	cerr << "Painting...\n";
-	sight.refreshScreen();
+	// cerr << "Painting...\n";
+	// sight.refreshScreen();
+	// render(); //This is your own render stuff
+	Refresh(false);
 } // end event
 
 // -----------------------------------------------------------------------------

@@ -9,19 +9,19 @@
 #include <wx/mstream.h>
 #include <wx/image.h>
 
-#include "../art/cif-png.h"
-#include "../art/drag-png.h"
-#include "../art/label-png.h"
-#include "../art/line-png.h"
-#include "../art/minus-png.h"
-#include "../art/plus-png.h"
-#include "../art/select-png.h"
-#include "../art/rectangle-png.h"
-#include "../art/ruler-png.h"
-#include "../art/select-png.h"
-#include "../art/sight-png.h"
-#include "../art/wire-png.h"
-#include "../art/zoom-png.h"
+#include "../../images/cif_img.h"
+#include "../../images/drag_img.h"
+#include "../../images/label_img.h"
+#include "../../images/line_img.h"
+#include "../../images/minus_img.h"
+#include "../../images/plus_img.h"
+#include "../../images/select_img.h"
+#include "../../images/rectangle_img.h"
+#include "../../images/ruler_img.h"
+#include "../../images/select_img.h"
+#include "../../images/sight_img.h"
+#include "../../images/wire_img.h"
+#include "../../images/zoom_img.h"
 
 #define wxGetImageFromMemory(name) _wxGetImageFromMemory(name ## _img, sizeof(name ## _img))
 inline wxImage _wxGetImageFromMemory(const unsigned char *data, int length) {
@@ -377,7 +377,7 @@ void wxSightFrame::CreateSightPane()
 #endif
 
 	basic = new BasicGLPane( this, args );
-	basic->Show();
+	basic->Show(true);
 
 	// Add panes
 	clsAuiManager->AddPane( basic, wxAuiPaneInfo().Name( wxT("Sight") ).CenterPane() );
@@ -388,7 +388,10 @@ void wxSightFrame::CreateSightPane()
 	}
 
 	basic->SetCurrent();
+	basic->SwapBuffers();
 }
+
+
 
 // -----------------------------------------------------------------------------
 

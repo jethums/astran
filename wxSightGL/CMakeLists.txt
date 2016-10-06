@@ -10,6 +10,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(wxSightGL)
 
+# Binnary name
+set(BIN SigthGL)
+
 #message(STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM})
 #message(STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME})
 ##message(STATUS "CMAKE_SYSTEM_VERSION: " ${CMAKE_SYSTEM_VERSION})
@@ -71,7 +74,7 @@ endif(WIN32)
 
 # Here we define the executable minimal.exe or minimal on other systems
 # the above paths and defines will be used in this build
-add_executable(wxsightgl WIN32 ${SRCS})
+add_executable(${BIN} WIN32 ${SRCS})
 
 # You can figure out what libraries you need here;
 # We need the Find package for wxWidgets to work
@@ -81,8 +84,18 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -Wno-deprecated -Wl,-rpath,/usr/lib64/")
 
 if(wxWidgets_FOUND)
 	include(${wxWidgets_USE_FILE})
-	target_link_libraries(wxsightgl ${wxWidgets_LIBRARIES} glut GL GLU GLEW)
+	target_link_libraries(${BIN} ${wxWidgets_LIBRARIES} glut GL GLU GLEW X11)
 else(wxWidgets_FOUND)
 	message("wxWidgets not found!")
 endif()
 
+
+
+##---------------------------------------------------
+
+# add_custom_target(Name [ALL] [command1 [args1...]]
+#                   [COMMAND command2 [args2...] ...]
+#                   [DEPENDS depend depend depend ... ]
+#                   [WORKING_DIRECTORY dir]
+#                   [COMMENT comment] [VERBATIM]
+#                   [SOURCES src1 [src2...]])
