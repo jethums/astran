@@ -1,0 +1,26 @@
+sudo sudo apt-add-repository 'deb http://repos.codelite.org/wx3.0.5/ubuntu/ bionic universe'
+
+//Se o comando acima relatar erro referente a chave pública/privada rodar o camando para cada chave relatada
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6856E1DB1AC82609
+
+sudo apt-get update
+
+sudo apt-get install libwxbase3.0-0-unofficial \
+                 libwxbase3.0-dev \
+                 libwxgtk3.0-0-unofficial \
+                 libwxgtk3.0-dev \
+                 wx3.0-headers \
+                 wx-common \
+                 libwxbase3.0-dbg \
+                 libwxgtk3.0-dbg \
+                 wx3.0-i18n \
+                 wx3.0-examples \
+                 wx3.0-doc
+
+sudo apt-get install libglew-dev
+
+sudo apt-get install freeglut3-dev
+
+//demais comandos para clonar o repositório do Astran
+
+
